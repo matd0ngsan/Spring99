@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+/*  Check  List searchBar */
+#searchBar {
+	color:DimGray ; font-family:돋움; font-size:16px;
+	float: left;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Orbitron:wght@900&display=swap');
+		
+html {
+	font-size: 10px;
+	text-align: center;
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+ul {
+	margin: 0;
+}
+
+li {
+	text-decoration: none;
+	list-style:none;
+	float : left;
+}
+
+header {
+	background-color: #ffeeee;
+	width: 100vw;
+	padding: 2rem;
+}
+
+header #now {
+	font-family: 'Orbitron';
+}
+
+#stampbox  #challenge {
+	/*border: 0.2rem solid #badb24;*/
+    width: 84rem;
+    height: 20rem;
+	margin: auto;
+	padding: 2rem;
+	text-align: center;
+	background-image : url(../images/sb.png);
+	background-repeat: no-repeat;
+}
+
+#stampbox  #challenge tr th {
+	height: 8rem;
+}
+
+#stampbox #challenge tr td {
+	/*border: 0.1rem solid #b4db24;*/
+	width: 8rem;
+	height: 8rem;
+	background-size: cover;
+}
+
+
+nav {
+	background-color: #ffffee;
+	width: 100vw;
+	height: 3vh;
+}
+
+nav #navimenu li {
+    margin: 0.2rem;
+    padding: 0.3rem;
+    background-color: #b0dd3a;
+    border-radius: 0.5rem 0.5rem 0.5rem 0rem;
+    color: #fffeed;
+}
+
+section {
+	background-color: #ffeeff;
+	width: 100vw;
+	height: 70vh;
+}
+
+section div {
+	border: 0px solid black;
+}
+
+section #midbox {
+	width: 75vw;
+	height: 15vh;
+	float: left;
+	background-color: #ffffff;
+}
+
+section #midbox #now {
+  	position: absolute;
+}
+
+section #midbox .img {
+	width: 15vw;
+	height: 15vh;
+	float: left;
+  	background-size: cover;
+}
+
+section #userbox {
+	width: 25vw;
+	height: 15vh;
+	float: left;
+}
+
+#userbox form .loginbox {
+	width: 15vw;
+	height: 2vh;
+	margin: 0.5vh auto;
+  	border: 0.2rem solid #badb24;
+  	background-color: #ffffff;
+}
+
+#userbox form {
+	padding-top: 2rem;
+}
+
+#userbox form .loginbox input[type="text"] {
+	border: none;
+	width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+#userbox form .loginbox input[type="submit"] {
+	width: 10vw;
+	height: 2vh;
+	margin: 0.5rem;
+	border: 3px solid #bed170;
+    background-color: #689b20;
+    color: white;
+}
+
+#botbox {
+	width: 100%;
+	height: 100%;
+	border: none;
+  	padding: 0.5rem;
+}
+
+

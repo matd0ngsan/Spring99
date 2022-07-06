@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapperInterface.StampMapper" >
+	
+	
+<select id="selectList" resultType="vo.StampVO">
+	select * from stamp where id=#{id} AND cnt=10 order by seq desc
+</select>
+
+<select id="selectOne" resultType="vo.StampVO" >
+	select * from stamp where seq=#{seq} AND cnt&lt;10
+</select>
+
+<!-- 
+"  :  &quot;
+' :  &apos;
+< :  &lt;
+> :  &gt; 
+-->
+	
+<insert id="insert">
+	insert into stamp(id, title, cnt) values(#{id},#{title},default)
+</insert>
+
+<update id="update">
+	update stamp set cnt=cnt+1 where seq=#{seq}
+</update>
+
+<delete id="delete">
+	delete from stamp where seq=#{seq}
+</delete>
+
+</mapper>

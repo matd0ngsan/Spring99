@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapperInterface.MailMapper" >
+
+<select id="aidBList" resultType="vo.MailVO">
+	select * from mail where id=#{id} order by seq desc
+</select>
+
+<select id="mailListR" resultType="vo.MailVO">
+	select * from mail where toId=#{toId} order by seq desc
+</select>
+
+<select id="mailListS" resultType="vo.MailVO">
+	select * from mail where fromId=#{fromId} order by seq desc
+</select>
+
+<select id="selectOne" resultType="vo.MailVO" >
+	select * from mail where seq=#{seq}
+</select>
+<!-- #{seq} : parameter 로 전달된 vo 의 seq 라는 컬럼의 value 가 전달됨  
+			 -> getSeq() 로 처리함	-->
+
+<update id="countUp">
+	update mail set cnt=cnt+1 where seq=#{seq}
+</update>
+
+<insert id="insert">
+	insert into mail(toId,fromId,msg,ccheck,date) values(#{toId},#{fromId},#{msg},0,default)
+</insert>
+
+<update id="update">
+	update mail set msg=#{msg}, where seq=#{seq}
+</update>
+
+<delete id="delete">
+	delete from mail where seq=#{seq}
+</delete>
+
+</mapper>  

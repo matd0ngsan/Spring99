@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapperInterface.MemberMapper" >
+<!--  
+** interface 를 통해 ~Mapper 접근
+=> interface ~Mapper.java 의 패키지명과 화일명과  
+   ~Mapper.xml 의 패키지명, 화일명, namespace 값은 같아야됨. -->  
+
+<!-- <select id="selectList" resultType="vo.MemberVO">
+	select id, password, name, 
+	CONCAT(lev, IF(lev='A', ' 관리자', IF(lev='B', ' 나무', IF(lev='C', ' 잎새', ' 새싹')))) lev, 
+	birthd, point, weight from member order by id 
+</select> 
+
+** CONCAT(a,b,c)  매개변수 2 이상 Test 
+=> MySql 커맨드 , Mybatis 모두 허용됨
+-->
+<select id="selectList" resultType="vo.MemberVO">
+	select id, password, name, lev, scheck from member order by id 
+</select>
+
+<select id="selectOne" resultType="vo.MemberVO" >
+	select id, password, name, lev, scheck from member where id=#{id}
+</select>
+<!-- #{id} : parameter 로 전달된 vo 의 id 라는 컬럼의 value 가 전달됨  
+			 -> getId() 로 처리함	-->
+
+<insert id="insert">
+	insert into member values( #{id},#{password},#{name},default,default )
+</insert>
+
+<update id="update">
+	update member set password=#{password},name=#{name} where id=#{id}
+</update>
+
+<delete id="delete">
+	delete from member where id=#{id}
+</delete>
+
+</mapper>  
