@@ -21,8 +21,8 @@ public class StampController {
 	@Autowired 
 	StampService service;
 	
-	@RequestMapping(value = "/stamplist", method=RequestMethod.GET)
-	public ModelAndView stamplist(HttpServletRequest request, ModelAndView mv, StampVO vo) {
+	@RequestMapping(value = "/slist", method=RequestMethod.GET)
+	public ModelAndView slist(HttpServletRequest request, ModelAndView mv, StampVO vo) {
 		
 		HttpSession session = request.getSession(false);
 		vo.setId((String)session.getAttribute("LoginID"));
@@ -32,28 +32,29 @@ public class StampController {
 		else
 			mv.addObject("message", "~~ vo null: 개인정보 읽어오기 실패 !! ~~");
 		
-		mv.setViewName("stamp/stamp");
+		mv.setViewName("stamp/stampList");
 		return mv;
 	}
 	
-	@RequestMapping(value = "/stampselect", method=RequestMethod.GET)
-	public ModelAndView stampselect(HttpServletRequest request, RedirectAttributes rttr, ModelAndView mv, StampVO vo) {
+	@RequestMapping(value = "/sselect", method=RequestMethod.GET)
+	public ModelAndView sselect(HttpServletRequest request, ModelAndView mv, StampVO vo) {
 		
-		vo=service.selectOne(vo);
+		HttpSession session = request.getSession(false);
+		vo.setId((String)session.getAttribute("LoginID"));
+		
 		if ( vo != null) {
-			mv.addObject("cherry", vo);
-			mv.setViewName("stamp/stamp");
+			mv.addObject("cherry", service.selectOne(vo));
 			
 		}else {
-			rttr.addFlashAttribute("message", "~~ 글번호에 해당하는 글이 없습니다 ~~");
-			mv.setViewName("redirect:home");
+			mv.addObject("message", "~~ 글번호에 해당하는 글이 없습니다 ~~");
 		}
 		
+		mv.setViewName("stamp/stampOne");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/sinsert", method=RequestMethod.POST)
-	public ModelAndView stampinsert(HttpServletRequest request, ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
+	public ModelAndView sinsert(HttpServletRequest request, ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
 		
 		HttpSession session = request.getSession(false);
 		System.out.println("***** vo => "+vo);
@@ -79,7 +80,7 @@ public class StampController {
 	}
 	
 	@RequestMapping(value = "/supdate", method=RequestMethod.GET)
-	public ModelAndView stampupdate(ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
+	public ModelAndView supdate(ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
 		
 		if ( service.update(vo) > 0 ) {
 			rttr.addFlashAttribute("message", "~~ 글수정 성공 ~~");

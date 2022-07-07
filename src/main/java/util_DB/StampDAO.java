@@ -21,7 +21,7 @@ public class StampDAO {
 	private ResultSet rs;
 	private String sql;
 	
-	public List<StampVO> selectList(StampVO vo) {
+	public List<StampVO> stampList(StampVO vo) {
 		
 		sql= "select * from stamp where id=? AND cnt=10 order by seq desc" ;
 		List<StampVO> list = new ArrayList<StampVO>();
@@ -47,15 +47,17 @@ public class StampDAO {
 				list = null;
 			}
 		} catch (Exception e) {
-			System.out.println("** selectList Exception => "+e.toString());
+			System.out.println("** stampList Exception => "+e.toString());
 			list = null;
 		}
 		
 		return list;
 	}//selectList
 	
-	public StampVO selectOne(StampVO vo) {
-		sql = "select * from stamp where seq=? AND cnt<10";
+	public List<StampVO> stampOne(StampVO vo) {
+		sql = "select * from stamp where id=? AND cnt<10";
+		List<StampVO> list = new ArrayList<StampVO>();
+		
 		try {
 			
 			pst = cn.prepareStatement(sql);
@@ -64,22 +66,26 @@ public class StampDAO {
 			rs = st.executeQuery(sql);
 			
 			if (rs.next()) {
-				vo.setSeq(rs.getInt(1));
-				vo.setId(rs.getString(2));
-				vo.setTitle(rs.getString(3));
-				vo.setCnt(rs.getInt(4));
-				
+				do {
+					StampVO vo2 = new StampVO();
+					vo2.setSeq(rs.getInt(1));
+					vo2.setId(rs.getString(2));
+					vo2.setTitle(rs.getString(3));
+					vo2.setCnt(rs.getInt(4));
+					list.add(vo2);
+					
+				} while(rs.next());
 			} else {
 				System.out.println("** 현재 진행중인 도전이 없습니다 **");
 				vo=null;
 			}
 			
 		} catch (Exception e) {
-			System.out.println("** selectOne Exception => "+e.toString());
+			System.out.println("** stampOne Exception => "+e.toString());
 			vo=null;
 		}
 		
-		return vo;
+		return list;
 	}//selectOne
 	
 	public int insert(StampVO vo) {

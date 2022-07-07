@@ -20,7 +20,7 @@ public class StampServiceImpl implements StampService {
 	}
 	
 	@Override
-	public StampVO selectOne(StampVO vo) {
+	public List<StampVO> selectOne(StampVO vo) {
 		return mapper.selectOne(vo);
 	}
 	

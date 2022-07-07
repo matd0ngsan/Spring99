@@ -184,7 +184,7 @@
 		<c:if test="${empty LoginID}">
 			&nbsp;&nbsp;<a href="loginf">LoginF</a>
 			&nbsp;&nbsp;<span id="axloginf" class="textlink" >axLoginF</span>
-			&nbsp;&nbsp;<a href="stamp">stamp</a>
+			&nbsp;&nbsp;<a href="stampOne">stamp</a>
 		</c:if>
 		<hr>
 	</div>
@@ -202,12 +202,12 @@
 
 	$("#nav1").click(function(){
 		//도장판 (있으면 등록, 없으면...)
-		$("#box").load("stamp");
+		$("#box").load("sselect");
 	});
 
 	$("#nav2").click(function(){
 		//달성치 수정 (클릭하면 확인하고 작동)
-		$("#box").alert("aaaaaaaa");
+		$("#box").load("slist");
 	});
 
 	$("#nav3").click(function(){

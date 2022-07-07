@@ -11,64 +11,35 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="resources/myLib/jquery-3.2.1.min.js"></script>
 	
-	<script>
-		
-	$(function() {
-		
-		let stamp = 7;
-		
-		var stamp1 = $("#stamp1");
-		var stamp2 = $("#stamp2");
-		var stamp3 = $("#stamp3");
-		var stamp4 = $("#stamp4");
-		var stamp5 = $("#stamp5");
-		var stamp6 = $("#stamp6");
-		var stamp7 = $("#stamp7");
-		var stamp8 = $("#stamp8");
-		var stamp9 = $("#stamp9");
-		var stamp0 = $("#stamp0");
-		
-		if (stamp > 0) {
-			stamp1.css("background-image","url(./resources/images/stamp.png)");
-			if (stamp > 1) {
-				stamp2.css("background-image","url(./resources/images/stamp.png)");
-				if (stamp > 2) {
-					stamp3.css("background-image","url(./resources/images/stamp.png)");
-					if (stamp > 3) {
-						stamp4.css("background-image","url(./resources/images/stamp.png)");
-						if (stamp > 4) {
-							stamp5.css("background-image","url(./resources/images/stamp.png)");
-							if (stamp > 5) {
-								stamp6.css("background-image","url(./resources/images/stamp.png)");
-								if (stamp > 6) {
-									stamp7.css("background-image","url(./resources/images/stamp.png)");
-									if (stamp > 7) {
-										stamp8.css("background-image","url(./resources/images/stamp.png)");
-										if (stamp > 8) {
-											stamp9.css("background-image","url(./resources/images/stamp.png)");
-											if (stamp > 9) {
-												stamp0.css("background-image","url(./resources/images/stamp.png)");
-		}}}}}}}}}}
-		
-	});
-	</script>
 </head>
 <body>
 <c:if test="${not empty LoginID}" >
 	<div id="stampbox">
-		<table id="challenge">
-			<tr><th colspan="10"><b>${LoginName}</b> 의 표</th></tr>
-			<tr><td class="stamp" id="stamp1">1</td>
-				<td class="stamp" id="stamp2">2</td>
-				<td class="stamp" id="stamp3">3</td>
-				<td class="stamp" id="stamp4">4</td>
-				<td class="stamp" id="stamp5">5</td>
-				<td class="stamp" id="stamp6">6</td>
-				<td class="stamp" id="stamp7">7</td>
-				<td class="stamp" id="stamp8">8</td>
-				<td class="stamp" id="stamp9">9</td>
-				<td class="stamp" id="stamp0">10</td></tr>
-		</table>
+		<c:if test="${not empty cherry}">
+			<c:forEach var="stamp" items="${cherry}">
+				<table id="challenge">
+					<tr><th colspan="10"><b>${LoginName}</b> 의 표</th></tr>
+					<tr>
+						<c:forEach begin="1" end="${stamp.cnt}">
+							<td class="stamp" id="stamp1">1</td>
+						</c:forEach>
+						<c:forEach begin="${stamp.cnt}" end="9">
+							<td class="stamp" id="stamp1">0</td>
+						</c:forEach>
+					</tr>
+				</table>
+				<c:if test="${stamp.cnt == 10}">
+					<form action="sinsert" method="get"><input type="hidden" value="${stamp.id}"><input type="submit" value="새 도전"></form>
+				</c:if>
+				<c:if test="${stamp.cnt != 10}">
+					<form action="supdate" method="get"><input type="hidden" value="${stamp.seq}"><input type="submit" value="도장 찍기"></form>
+				</c:if>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${empty cherry}">
+			<tr height=30><td colspan=5>** 출력할 자료가 1건도 없습니다 **</td></tr>
+		</c:if>
 	</div>
 </c:if>
 <c:if test="${empty LoginID}">
