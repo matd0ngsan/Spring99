@@ -15,18 +15,18 @@
 </head>
 <body>
 <form action="mpost" method="POST">
-<table>
+<table id="postbox">
 	<tr height="40">
-		<td bgcolor="LightGreen">받는 사람 ID</td>
-		<td><input type="text" name="toId" id="toId" required></td>
+		<td class="label">받는 사람 ID</td>
+		<td class="contents"><input type="text" name="toId" id="toId" required></td>
 	</tr>
 	<tr height="40">
-		<td bgcolor="LightGreen">내용</td>
-		<td><textarea rows="5" cols="50" name="msg" id="msg" required></textarea></td>
+		<td class="label">내용</td>
+		<td class="contents"><textarea rows="5" cols="50" name="msg" id="msg" required></textarea></td>
 	</tr>
 	<tr>
 		<td><input type="hidden" name="fromId" value="${LoginID}"></td>
-		<td><input type="submit" value="글등록">&nbsp;&nbsp;
+		<td class="submitbtn"><input type="submit" value="글등록">
 			<input type="reset" value="취소"></td>
 	</tr>
 </table>

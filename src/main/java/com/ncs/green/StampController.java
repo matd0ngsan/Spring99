@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import vo.StampVO;
 
 @Controller
 public class StampController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired 
 	StampService service;
@@ -56,6 +60,8 @@ public class StampController {
 	@RequestMapping(value = "/sinsert", method=RequestMethod.POST)
 	public ModelAndView sinsert(HttpServletRequest request, ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
 		
+		logger.info("sinsert controller");
+		
 		HttpSession session = request.getSession(false);
 		System.out.println("***** vo => "+vo);
 		
@@ -70,32 +76,28 @@ public class StampController {
 				mv.addObject("message", "~~ 새글등록 실패 !! 다시 하세요 ~~");
 				mv.setViewName("redirect:home");
 				System.out.println("새글 등록 실패");
-				
 			}
-			
 		}
-		
 		return mv;
-		
 	}
 	
 	@RequestMapping(value = "/supdate", method=RequestMethod.GET)
 	public ModelAndView supdate(ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
 		
+		logger.info("supdate controller");
+		
 		if ( service.update(vo) > 0 ) {
-			rttr.addFlashAttribute("message", "~~ 글수정 성공 ~~");
-			mv.setViewName("redirect:home");
+			mv.setViewName("stamp/stampCnt");
 		} else  {
 			rttr.addFlashAttribute("message", "~~ 글수정 실패 !! 다시 하세요 ~~");
 			mv.setViewName("redirect:home");
-			
 		}
-		return mv;
 		
+		return mv;
 	}
 	
 	@RequestMapping(value = "/sdelete", method=RequestMethod.GET)
-	public  ModelAndView stampdelete(ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
+	public  ModelAndView sdelete(ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
 		
 		if ( service.delete(vo) > 0 ) {
 			rttr.addFlashAttribute("message", "~~ 글삭제 성공 ~~");

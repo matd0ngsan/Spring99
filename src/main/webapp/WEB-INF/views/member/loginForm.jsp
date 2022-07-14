@@ -58,10 +58,10 @@ function inCheck() {
 <br>
 
 <form action="login" method=post>
-<table>
-	<tr><td class="loginbox" id="login_id"><input type="text" name=id id=id placeholder="아이디"></td></tr>
-	<tr><td class="loginbox" id="login_pw"><input type="text" name=password id=password placeholder="비밀번호"></td></tr>
-	<tr><td><input type="submit" value="LOGIN" id="submit" onclick="return inCheck()"></td></tr>
+<table class="loginbox">
+	<tr><td id="login_id"><input type="text" name=id id=id placeholder="아이디"></td></tr>
+	<tr><td id="login_pw"><input type="text" name=password id=password placeholder="비밀번호"></td></tr>
+	<tr><td class="submittd"><input type="submit" value="LOGIN" id="submit" onclick="return inCheck()"></td></tr>
 </table>
 </form>
 <br>

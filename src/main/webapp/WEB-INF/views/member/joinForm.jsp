@@ -90,10 +90,10 @@ function idDupCheck() {
 </head>
 <body>
 <form action="join" method="post" id="myform" enctype="multipart/form-data" >
-<table>
+<table class="joinbox">
 <tr height=40>
- 	<td><input type="text" name=id id=id size="20" placeholder="아이디">&nbsp;&nbsp;
- 		<button type="button" id="idDup" onclick="idDupCheck()">ID 중복확인</button><br>
+ 	<td><input type="text" name=id id=id size="20" placeholder="아이디">
+ 		<button type="button" id="idDup" onclick="idDupCheck()">중복확인</button><br>
  		<span id="iMessage" class="eMessage"></span></td>
 </tr>
 <tr height=40>
@@ -105,9 +105,9 @@ function idDupCheck() {
  		<span id="nMessage" class="eMessage"></span></td>
 </tr>
 <tr>	
-	<td><br>
-	<input type="submit" value=가입 id="submit" onclick="return inCheck()" disabled >&nbsp;&nbsp;
-	<input type="reset" value="취소">&nbsp;&nbsp;
+	<td class="submittd">
+	<input type="submit" value=가입 id="submit" onclick="return inCheck()" disabled >
+	<input type="reset" value="취소">
 	</td>
 </tr>	
 </table>

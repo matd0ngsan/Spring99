@@ -20,8 +20,36 @@ public class MailDAO {
 	private String sql ;
 	
 	// ** selectList
+	public List<MailVO> mailListRN(MailVO vo) {
+		sql="select seq, date from mail where toId=? and ccheck=0 order by seq desc" ;
+		List<MailVO> list = new ArrayList<MailVO>();
+		try {
+			pst = cn.prepareStatement(sql);
+			pst.setString(1, vo.getToId());
+			st = cn.createStatement();
+			rs = st.executeQuery(sql);
+			// 출력 record 가 있는지 확인
+			if (rs.next()) {
+				// ResultSet 의 Data -> list 에 담기
+				do {
+					MailVO vo1 = new MailVO();
+					vo1.setSeq(rs.getInt(1));
+					vo1.setDate(rs.getString(2));
+					list.add(vo1);
+				}while(rs.next());
+			}else {
+				System.out.println("** 출력할 자료가 1개도 없습니다. **");
+				list = null;
+			}
+		} catch (Exception e) {
+			System.out.println("** selectList Exception => "+e.toString());
+			list = null;
+		}
+		return list;
+	} 
+	
 	public List<MailVO> mailListR(MailVO vo) {
-		sql="select * from mail where toId=? order by seq desc" ;
+		sql="select * from mail where toId=? and ccheck=1 order by seq desc" ;
 		List<MailVO> list = new ArrayList<MailVO>();
 		try {
 			pst = cn.prepareStatement(sql);
@@ -50,7 +78,7 @@ public class MailDAO {
 			list = null;
 		}
 		return list;
-	} //selectList
+	} 
 	
 	public List<MailVO> mailListS(MailVO vo) {
 		sql="select * from mail where fromId=? order by seq desc" ;
@@ -109,13 +137,13 @@ public class MailDAO {
 		return vo;
 	} //selectOne
 
-	// 조회수 증가 메서드 작성
-	public int countUp(MailVO vo) {
+	// 
+	public int countCheck(MailVO vo) {
 		// 조회수 증가 Sql 처리
-		sql="update mail set cnt=cnt+1 where seq=?" ;
+		sql="update mail set ccheck=1 where seq=(select min(seq) from (select seq from mail where toId=? and ccheck=0) tmp)" ;
 		try {
 			pst=cn.prepareStatement(sql);
-			pst.setInt(1, vo.getSeq());
+			pst.setString(1, vo.getToId());
 			return pst.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("** countUp Exception => "+e.toString());
@@ -161,5 +189,6 @@ public class MailDAO {
 			return 0;
 		}
 	} //delete
+	
 	
 } //class

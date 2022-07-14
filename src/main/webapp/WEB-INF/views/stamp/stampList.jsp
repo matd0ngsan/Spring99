@@ -14,19 +14,26 @@
 </head>
 <body>
 <c:if test="${not empty message}"><span id="message">${message}</span></c:if>
-
 <div id="stampbox">
 	<c:if test="${not empty cherry}">
 		<c:forEach var="stamp" items="${cherry}">
 			<table id="challenge">
-				<tr><th colspan="10"><b>${LoginName}</b> 의 표</th></tr>
-				<tr>
-					<c:forEach begin="1" end="10">
-						<td class="stamp" id="stamp1">${stamp.title}</td>
+					<tr><th colspan="3"><b>${stamp.title}</b></th></tr>
+					<c:forEach begin="1" end="3">
+					<tr>
+						<c:forEach begin="1" end="3">
+							<td class="stamp" id="stampO"></td>
+						</c:forEach>
+					</tr>
 					</c:forEach>
-				</tr>
-			</table>
-	</c:forEach>
+					<tr>
+						<td class="stamp" id="stampO"></td>
+						<td colspan="2">
+							<a href="sdelete?seq=${stamp.seq}">도장판 지우기</a>
+						</td>
+					</tr>
+				</table>
+		</c:forEach>
 	</c:if>
 	
 	<c:if test="${empty cherry}">

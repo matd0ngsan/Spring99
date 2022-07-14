@@ -12,6 +12,19 @@ html {
 	font-size: 10px;
 	text-align: center;
 	font-family: 'Do Hyeon', sans-serif;
+
+	width: 60rem;
+	margin: auto;
+	
+	--text1 : #666666;
+	--text2 : #ffffff;
+	--point1 : #ffe63d;
+	--point2 : #ffa5d7;
+}
+
+body {
+	background-image : url(../images/bg.png);
+
 }
 
 ul {
@@ -24,94 +37,212 @@ li {
 	float : left;
 }
 
+input[type="submit"], input[type="reset"] {
+    border: 0.2rem solid var(--point2);
+    background-color: var(--point1);
+    color: var(--text1);
+    border-radius: 2rem;
+}
+
 header {
-	background-color: #ffeeee;
-	width: 100vw;
-	padding: 2rem;
+	background-color: var(--point1);
+	text-align: right;
+    height: 5rem;
 }
 
-header #now {
-	font-family: 'Orbitron';
+header #mybox {
+	padding-top: 2rem;
+    padding-right: 5rem;
 }
-
-#stampbox  #challenge {
-	/*border: 0.2rem solid #badb24;*/
-    width: 84rem;
-    height: 20rem;
-	margin: auto;
-	padding: 2rem;
-	text-align: center;
-	background-image : url(../images/sb.png);
-	background-repeat: no-repeat;
-}
-
-#stampbox  #challenge tr th {
-	height: 8rem;
-}
-
-#stampbox #challenge tr td {
-	/*border: 0.1rem solid #b4db24;*/
-	width: 8rem;
-	height: 8rem;
-	background-size: cover;
-}
-
 
 nav {
-	background-color: #ffffee;
-	width: 100vw;
-	height: 3vh;
+	float: right;
+    position: relative;
+    top: -5rem;
+    width: 5rem;
 }
 
 nav #navimenu li {
     margin: 0.2rem;
     padding: 0.3rem;
-    background-color: #b0dd3a;
-    border-radius: 0.5rem 0.5rem 0.5rem 0rem;
+    background-color: var(--point2);
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
     color: #fffeed;
+    font-size: 1.6rem;
+    right: 1.5rem;
+    position: relative;
 }
 
 section {
-	background-color: #ffeeff;
-	width: 100vw;
+	width: 100%;
 	height: 70vh;
 }
 
 section div {
-	border: 0px solid black;
+	width: 90%;
+    margin: auto;
 }
 
-section #midbox {
-	width: 75vw;
-	height: 15vh;
+/*********************************** 스탬프  ***********************************/
+#stampO {
+	background-image : url(../images/O.gif);
+	background-size: cover;
+}
+
+#stampX {
+	background-image : url(../images/X.png);
+	background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+#stampbox  #challenge {
+	border: 0.2rem solid var(--point1);
+	margin: auto;
+	padding: 2rem;
+	text-align: center;
+	/*background-image : url(../images/sb.png);*/
+	background-repeat: no-repeat;
+	margin-top: 10rem;
+	border-radius: 3rem
+}
+
+#stampbox  #challenge tr th {
+	height: 5rem;
+}
+
+#stampbox #challenge tr td {
+	border: 0.1rem dashed var(--point1);
+    width: 10rem;
+    height: 10rem;
+    border-radius: 1rem;
+}
+
+#stampbox #challenge tr td[colspan="2"] {
+	border : none;
+
+}
+
+#stampbox #challenge form {
+	width: 100%;
+    height: 100%;
+    margin: 0;
+
+}
+
+#stampbox #challenge input[type="submit"] {
+	width: 90%;
+    height: 90%;
+    margin: 3%;
+}
+
+/*********************************** 우편함  ***********************************/
+
+.mailbox {
+	border: 0.2rem solid var(--point2);
+    margin: 2rem;
+    padding: 1rem;
+}
+
+.mailbox[id="mailR"] {
+    border-radius: 2rem 2rem 2rem 0rem;
+}
+
+.mailbox[id="mailS"] {
+    border-radius: 2rem 2rem 0rem 2rem;
+}
+
+.mailbox .seq {
+	font-size: 1.2rem;
 	float: left;
-	background-color: #ffffff;
 }
 
-section #midbox #now {
-  	position: absolute;
+.mailbox .msg {
+	font-size: 1.6rem;
+	
 }
 
-section #midbox .img {
-	width: 15vw;
-	height: 15vh;
-	float: left;
-  	background-size: cover;
+.mailbox .date {
+	font-size: 1rem;
+	float: right;
+	
 }
+
+
+form[action="mpost"] #postbox {
+	margin: 10rem auto;
+
+}
+
+#postbox tr .label {
+	border: 0.2rem solid var(--point2);
+
+}
+
+#postbox tr .contents {
+	border: 0.2rem solid var(--point1);
+
+}
+
+#postbox input[type="text"] {
+	border: none;
+	width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+#postbox textarea {
+	border: none;
+	width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+#postbox .submitbtn {
+	text-align: right;
+}
+
+/*********************************** 로그인x ***********************************/
 
 section #userbox {
-	width: 25vw;
-	height: 15vh;
-	float: left;
+	width: 100%;
+    height: 100%;
+    margin: 10rem auto;
 }
 
-#userbox form .loginbox {
+#userbox #btnbox {
+	width: 30rem;
+    height: 5rem;
+}
+
+#userbox #btnbox ul li {
+	width: 6rem;
+    height: 2rem;
+    padding: 0.2rem;
+    margin: 1rem;
+    border: 3px solid var(--point2);
+    background-color: var(--point1);
+    color: var(--text2);
+    font-size: 1.3rem;
+}
+
+#userbox form table {
+	margin: auto;
+}
+
+#userbox form .loginbox tr td, .joinbox tr td {
 	width: 15vw;
 	height: 2vh;
 	margin: 0.5vh auto;
-  	border: 0.2rem solid #badb24;
+  	border: 0.2rem solid var(--point1);
   	background-color: #ffffff;
 }
+
+#userbox form table .submittd {
+	border: none!important;
+
+ }
 
 #userbox form {
 	padding-top: 2rem;
@@ -124,20 +255,41 @@ section #userbox {
     padding: 0.5rem;
 }
 
-#userbox form .loginbox input[type="submit"] {
-	width: 10vw;
-	height: 2vh;
-	margin: 0.5rem;
-	border: 3px solid #bed170;
-    background-color: #689b20;
-    color: white;
-}
-
-#botbox {
-	width: 100%;
-	height: 100%;
+#userbox form .joinbox input[type="text"], input[type="password"] {
 	border: none;
-  	padding: 0.5rem;
+	width: 100%;
+    height: 100%;
+    padding: 0.5rem;
 }
 
+.joinbox input[name="id"] {
+	width: 80%!important;
+	float: left;
+}
+
+.joinbox span {
+	font-size: 1rem;
+}
+
+.joinbox button {
+	width: 3vw;
+	height: 2.6vh;
+	background-color: var(--point2);
+    color: var(--point1);
+	font-size: 1rem;
+	border: 0;
+}
+
+.loginbox input[type="submit"] {
+	width: 15vW;
+    height: 2vh;
+    margin: 0.5vh 1vw;
+}
+
+.joinbox input[type="submit"], .joinbox input[type="reset"] {
+	width: 6vW;
+    height: 2vh;
+    margin: 0.5vh 0.7vw;
+}
+    
 

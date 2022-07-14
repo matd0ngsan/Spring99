@@ -18,10 +18,10 @@ public class MailServiceImpl implements MailService {
 	// => interface BoardMapper 를 통해서 
 	//    BoardMapper.xml 의 SQL 구문 접근  
 	
-	@Override //Ajax_id_BoardList
-	public List<MailVO> aidBList(MailVO vo) {
-		return mapper.aidBList(vo);
-	}
+	@Override
+	public List<MailVO> mailListRN(MailVO vo) {
+		return mapper.mailListRN(vo);
+	} //selectList
 	
 	@Override
 	public List<MailVO> mailListR(MailVO vo) {
@@ -39,8 +39,8 @@ public class MailServiceImpl implements MailService {
 	} //selectOne
 	
 	@Override
-	public int countUp(MailVO vo) {
-		return mapper.countUp(vo);
+	public int countCheck(MailVO vo) {
+		return mapper.countCheck(vo);
 	}
 	
 	@Override

@@ -12,7 +12,7 @@ public class DBConnection {
 	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
+			String url = "jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&allowMultiQueries=true";
 			System.out.println("** JDBC Connection 요기까지 성공 **");
 			return DriverManager.getConnection(url, "root", "mysql") ;
 		} catch (Exception e) {

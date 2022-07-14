@@ -21,7 +21,7 @@ public class StampDAO {
 	private ResultSet rs;
 	private String sql;
 	
-	public List<StampVO> stampList(StampVO vo) {
+	public List<StampVO> selectList(StampVO vo) {
 		
 		sql= "select * from stamp where id=? AND cnt=10 order by seq desc" ;
 		List<StampVO> list = new ArrayList<StampVO>();
@@ -54,7 +54,7 @@ public class StampDAO {
 		return list;
 	}//selectList
 	
-	public List<StampVO> stampOne(StampVO vo) {
+	public List<StampVO> selectOne(StampVO vo) {
 		sql = "select * from stamp where id=? AND cnt<10";
 		List<StampVO> list = new ArrayList<StampVO>();
 		
@@ -93,8 +93,8 @@ public class StampDAO {
 		
 		try {
 			pst=cn.prepareStatement(sql);
-			vo.setId(rs.getString(1));
-			vo.setTitle(rs.getString(2));
+			pst.setString(1, vo.getId());
+			pst.setString(2, vo.getTitle());
 			return pst.executeUpdate();
 			
 		} catch (Exception e) {
@@ -109,6 +109,7 @@ public class StampDAO {
 		try {
 			pst=cn.prepareStatement(sql);
 			pst.setInt(1, vo.getSeq());
+			pst.setString(2, vo.getId());
 			return pst.executeUpdate();
 			
 		} catch (Exception e) {

@@ -65,45 +65,16 @@ function nameCheck() {
 		$('#nMessage').html('');
 		return true;
 	} 
-}; nameCheck//
+}; //nameCheck//
 
-function biCheck() {
-	var birthd = $('#birthd').val();
-	if ( birthd.length != 10 ) {
-		$('#bMessage').html(' 생년월일을 정확하게 입력 하세요 (yyyy-mm-dd) !! ');
-		$('#birthd').focus();
+function titleCheck() {
+	var title = $('#title').val();
+	if ( title.length < 2) {
+		$('#tMessage').html(' Title 길이는 2 이상 입니다. !! ');
+		$('#title').focus();
 		return false;
 	}else {
-		$('#bMessage').html('');
-		return true;
-	}  
-}; //biCheck
-
-function pointCheck() {
-	var point = $('#point').val();
-	if ( $.isNumeric(point)==false ||
-		point.replace(/[.]/g,'').length < point.length ) {
-		$('#poMessage').html(' 정수값을  정확하게 입력 하세요. !! ');
-		$('#point').focus();
-		return false;
-	}else {
-		$('#poMessage').html('');
+		$('#tMessage').html('');
 		return true;
 	} 
-}; //poCheck
-
-function weCheck() {
-	var weight = $('#weight').val();
-	if ( $.isNumeric(weight)==false ) {
-		$('#wMessage').html(' weight 값을 숫자로 정확하게 입력 하세요. (20~200) !! ');
-		$('#weight').focus();
-		return false;
-	}else if ( parseFloat(weight) < 20 || parseFloat(weight) > 200 ) {
-		$('#wMessage').html(' weight 의 범위를 벗어납니다. (20~200) !! ');
-		$('#weight').focus();
-		return false;
-	}else {
-		$('#wMessage').html('');
-		return true;
-	} 
-}; //weCheck
+}; //titleCheck//
