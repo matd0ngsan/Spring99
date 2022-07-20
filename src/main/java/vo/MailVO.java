@@ -28,5 +28,6 @@ public class MailVO {
 	private String msg;
 	private int ccheck;
 	private String date;
+	private String toName;
 
 } //class

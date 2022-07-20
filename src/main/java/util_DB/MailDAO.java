@@ -19,7 +19,7 @@ public class MailDAO {
 	private ResultSet rs;
 	private String sql ;
 	
-	// ** selectList
+	//받은+열람 못한 편지
 	public List<MailVO> mailListRN(MailVO vo) {
 		sql="select seq, date from mail where toId=? and ccheck=0 order by seq desc" ;
 		List<MailVO> list = new ArrayList<MailVO>();
@@ -48,6 +48,7 @@ public class MailDAO {
 		return list;
 	} 
 	
+	//받은+열람한 편지
 	public List<MailVO> mailListR(MailVO vo) {
 		sql="select * from mail where toId=? and ccheck=1 order by seq desc" ;
 		List<MailVO> list = new ArrayList<MailVO>();
@@ -80,6 +81,7 @@ public class MailDAO {
 		return list;
 	} 
 	
+	//보낸 편지
 	public List<MailVO> mailListS(MailVO vo) {
 		sql="select * from mail where fromId=? order by seq desc" ;
 		List<MailVO> list = new ArrayList<MailVO>();
@@ -99,6 +101,7 @@ public class MailDAO {
 					vo2.setMsg(rs.getString(4));
 					vo2.setCcheck(rs.getInt(5));
 					vo2.setDate(rs.getString(6));
+					vo2.setToName(rs.getString(7));
 					list.add(vo2);
 				}while(rs.next());
 			}else {
@@ -152,12 +155,13 @@ public class MailDAO {
 	} //countUp
 	
 	public int insert(MailVO vo) {
-		sql = "insert into mail(toId,fromId,msg,ccheck,date) values(?,?,?,0,default)" ;
+		sql = "insert into mail(toId,fromId,msg,ccheck,date,toName) values(?,?,?,0,default,(select name from member where id=?))" ;
 		try {
 			pst=cn.prepareStatement(sql);
 			pst.setString(1, vo.getToId());
 			pst.setString(2, vo.getFromId());
 			pst.setString(3, vo.getMsg());
+			pst.setString(4, vo.getToId());
 			return pst.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("** Board insert Exception => "+e.toString());

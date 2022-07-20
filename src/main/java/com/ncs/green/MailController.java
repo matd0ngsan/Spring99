@@ -106,6 +106,22 @@ public class MailController {
 	} 
 	//ccheck
 	
+	@RequestMapping(value = "/mdelete", method=RequestMethod.GET)
+	public  ModelAndView mdelete(ModelAndView mv, MailVO vo, RedirectAttributes rttr) {
+		
+		if ( service.delete(vo) > 0 ) {
+			rttr.addFlashAttribute("message", "~~ 글삭제 성공 ~~");
+			mv.setViewName("redirect:home");
+			
+		}else {
+			rttr.addFlashAttribute("message", "~~ 글삭제 실패 !! 다시 하세요 ~~");
+			mv.setViewName("redirect:home");
+			
+		}
+		return mv;
+		
+	}//mdelete
+	
 	
 	@RequestMapping(value = "/gohome", method=RequestMethod.GET)
 	public ModelAndView gohome(HttpServletRequest request, ModelAndView mv, MailVO vo) {

@@ -10,13 +10,17 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="resources/myLib/jquery-3.2.1.min.js"></script>
 	
+	<script>
+		function gohome() {
+			setTimeout("location.href='gohome'",3000);
+		}
+	
+	</script>
 
 </head>
-<body>
+<body onload="gohome()">
 
 <div></div>
 내가해냄!
-<a href="ccheck?toId=${LoginID}">home</a>
-<a href="gohome">home</a>
 </body>
 </html>

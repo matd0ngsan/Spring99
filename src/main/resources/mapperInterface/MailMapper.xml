@@ -25,7 +25,7 @@
 </update>
 
 <insert id="insert">
-	insert into mail(toId,fromId,msg,ccheck,date) values(#{toId},#{fromId},#{msg},0,default)
+	insert into mail(toId,fromId,msg,ccheck,date,toName) values(#{toId},#{fromId},#{msg},0,default,(select name from member where id=#{toId}))
 </insert>
 
 <update id="update">

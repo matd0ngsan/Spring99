@@ -26,8 +26,7 @@
 	</tr>
 	<tr>
 		<td><input type="hidden" name="fromId" value="${LoginID}"></td>
-		<td class="submitbtn"><input type="submit" value="글등록">
-			<input type="reset" value="취소"></td>
+		<td class="submitbtn"><input type="submit" value="보내기"></td>
 	</tr>
 </table>
 </form><br>

@@ -11,70 +11,8 @@
 	<script src="resources/myLib/jquery-3.2.1.min.js"></script>
 	<script src="resources/myLib/axTest01.js"></script>
 	
-	<script>
-		
-	$(function() {
-		
-		var now = new Date();
-		
-		//var year = now.getFullYear(); // 년, 2015
-		//var month = (now.getMonth() + 1); // 월, 11[1을 더해야함. 유일하게 조심해야할 부분. 1월은 0이다.]
-		//var date = now.getDate(); // 일, 14
-		 
-		let h = now.getHours(); // 시, 10
-		let m = now.getMinutes(); // 분, 35
-		let s = now.getSeconds(); // 초, 42
-		 
-		//var day = now.getDay(); // 요일, 숫자로 출력됨(0~6), 일요일(0)부터 시작해서 토요일(6)에 끝남
-		
-					
-		setInterval(function() {
-			now = new Date();
-			h = now.getHours();
-			m = now.getMinutes();
-			s = now.getSeconds();
-			
-			$("#now").text(h + " : " + m + " : " + s);
-		}, 1000);
-	});
-	</script>
-	
-	<script>
-		
-	$(function() {
-		
-		let cnt = 0;
-		
-		var img1 = $("#img1");
-		var img2 = $("#img2");
-		var img3 = $("#img3");
-		var img4 = $("#img4");
-		var img5 = $("#img5");
-				
-		setInterval(function() {
-			
-			switch(cnt) {
-				case 0 : break;
-				case 1 : img1.css("background-image","url(./resources/images/n.gif)"); break;
-				case 2 : img2.css("background-image","url(./resources/images/n.gif)"); break;
-				case 3 : img3.css("background-image","url(./resources/images/n.gif)"); break;
-				case 4 : img4.css("background-image","url(./resources/images/n.gif)"); break;
-				case 5 : img5.css("background-image","url(./resources/images/n.gif)"); break;
-				case 6 : img1.css("background-image","none"); break;
-				case 7 : img2.css("background-image","none"); break;
-				case 8 : img3.css("background-image","none"); break;
-				case 9 : img4.css("background-image","none"); break;
-				case 10 : img5.css("background-image","none"); cnt = 0; break;
-			}
-			cnt++;
-		}, 1000);
-		
-	});
-	</script>
-
 </head>
 <body>
-<c:if test="${not empty message}"><span id="message">${message}</span></c:if>
 <c:if test="${not empty LoginID}" >
 	<header>
 	<div id="mybox">
@@ -93,14 +31,28 @@
 	</nav>
 	<section>
 		<div id="box"><!-- 하단... -->
-			현재까지 받은 편지 갯수
-			열람한 편지 갯수
-			이...정보를 받아서 home으로 넘기는 컨트롤러 만들기
-			<c:if test="${not empty banana2}">
-				<c:forEach var="mailRN" items="${banana2}">
-					읽지 않은 메세지가 ${mailRN.seq} 통 있습니다.
-				</c:forEach>
-			</c:if>
+			<c:if test="${not empty message}"><span id="message">${message}</span></c:if>
+			
+			<p class="hometext">
+			<br>이 사이트에서는...<br><br>
+			
+			<span class="text1">사용법</span><br><br>
+			<span class="text2">도장</span> : 도전 과제를 만들고, 달성하고, 해낸 도전들을 기록할 수 있어요.<br>
+			<span class="text2">편지</span> : 친구들과 주고받은 편지를 달성 갯수에 따라 열어볼 수 있어요.<br><br>
+			
+			<span class="text2">잠깐!</span><br>
+			한 번 등록한 도전은 내용을 완수할 때까지 삭제할 수 없어요.<br>
+			한 번 보낸 편지는 친구가 확인하기 전에만 삭제할 수 있어요.<br><br>
+			
+			<span class="text1">주의사항</span><br><br>
+			본 사이트는 포트폴리오 용으로 개인에게 제작되었습니다.<br>
+			본 사이트에 입력된 모든 정보는 제작자의 의도에 따라, 혹은 의도가 아니더라도 불시에 삭제되거나 다른 곳에 제출, 게시될 수 있습니다.<br><br>
+			
+			!! 개인 정보를 입력하지 않도록 주의해주세요. !!<br><br>
+			
+			
+			</p>
+			
 		</div>
 	</section>
 </c:if>
@@ -115,38 +67,30 @@
 
 <script>
 	$("#loginB").click(function(){
-		//도장판 (있으면 등록, 없으면...)
 		$("#mbox").load("loginf");
 	});
 	
 	$("#joinB").click(function(){
-		//도장판 (있으면 등록, 없으면...)
 		$("#mbox").load("joinf");
 	});
 
 	$("#nav1").click(function(){
-		//도장판 (있으면 등록, 없으면...)
 		$("#box").load("sselect");
 	});
 
 	$("#nav2").click(function(){
-		//달성치 수정 (클릭하면 확인하고 작동)
 		$("#box").load("slist");
 	});
 
 	$("#nav3").click(function(){
-		//내가 받은 메시지 상태 (아래에 띄워줌)
-		//$("#box").html("<h3>예제1</h3><button>Click</button><p>--------</p><p>------</p>");
 		$("#box").load("mlistR");
 	});
 	
 	$("#nav4").click(function(){
-		//아직뭐없음 테스트...
 		$("#box").load("mlistS");
 	});
 
 	$("#nav5").click(function(){
-		//아직뭐없음 테스트...
 		$("#box").load("mpostf");
 	});
 </script>

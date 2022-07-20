@@ -1,17 +1,11 @@
 @charset "UTF-8";
-
-/*  Check  List searchBar */
-#searchBar {
-	color:DimGray ; font-family:돋움; font-size:16px;
-	float: left;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Orbitron:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Orbitron&display=swap');
 		
 html {
 	font-size: 10px;
 	text-align: center;
-	font-family: 'Do Hyeon', sans-serif;
+	text-decoration: none;
+	font-family: 'Jua', 'Orbitron', sans-serif;
 
 	width: 60rem;
 	margin: auto;
@@ -29,6 +23,28 @@ body {
 
 ul {
 	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover, a:focus { 
+	text-decoration: none;
+	animation-duration: 3s; 
+	animation-name: rainbowLink; 
+	animation-iteration-count: infinite; 
+}
+
+@keyframes rainbowLink {     
+	0% { color: #ff2a2a; }
+	15% { color: #ff7a2a; }
+	30% { color: #ffc52a; }
+	45% { color: #43ff2a; }
+	60% { color: #2a89ff; }
+	75% { color: #202082; }
+	90% { color: #6b2aff; } 
+	100% { color: #e82aff; }
 }
 
 li {
@@ -81,6 +97,26 @@ section {
 section div {
 	width: 90%;
     margin: auto;
+}
+
+section #box {
+	padding-bottom: 10rem;
+}
+
+section #box .hometext {
+	font-size: 1.6rem;
+    text-align: left;
+}
+
+section #box .hometext .text1 {
+	font-size: 2rem;
+	background-color: var(--point2);
+	color: var(--text2);
+    padding: 0.3rem 1.5rem;
+}
+
+section #box .hometext .text2 {
+	color: var(--point2);
 }
 
 /*********************************** 스탬프  ***********************************/
@@ -137,10 +173,20 @@ section div {
     margin: 3%;
 }
 
+td[colspan="2"] a {
+	border: 0.2rem solid var(--point2);
+    background-color: var(--point1);
+    color: var(--text2);
+    padding: 2rem;
+    border-radius: 2rem;
+}
+
 /*********************************** 우편함  ***********************************/
 
 .mailbox {
-	border: 0.2rem solid var(--point2);
+	border: 0.2rem solid var(--point1);
+	background: linear-gradient(60deg, var(--point2), var(--point1));
+    color: var(--text2);
     margin: 2rem;
     padding: 1rem;
 }
@@ -153,9 +199,22 @@ section div {
     border-radius: 2rem 2rem 0rem 2rem;
 }
 
-.mailbox .seq {
+.mailbox .toname {
 	font-size: 1.2rem;
 	float: left;
+}
+
+.mailbox .mdelete {
+	float: left;
+	background-color: var(--point1);
+    border-radius: 50%;
+    margin: auto 1rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.mailbox .mdelete a {
+	color: var(--text1);
 }
 
 .mailbox .msg {
