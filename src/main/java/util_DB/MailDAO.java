@@ -194,5 +194,29 @@ public class MailDAO {
 		}
 	} //delete
 	
+	public int deleteMailAllS(MailVO vo) {
+		sql = "update mail set fromId = replace(fromId, ?, null)" ;
+		try {
+			pst=cn.prepareStatement(sql);
+			pst.setString(1, vo.getFromId());
+			return pst.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("** Board delete Exception => "+e.toString());
+			return 0;
+		}
+	} //deleteMailAll
+	
+	public int deleteMailAllR(MailVO vo) {
+		sql = "update mail set toId = replace(toId, ?, null)" ;
+		try {
+			pst=cn.prepareStatement(sql);
+			pst.setString(1, vo.getToId());
+			return pst.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("** Board delete Exception => "+e.toString());
+			return 0;
+		}
+	} //deleteMailAll
+	
 	
 } //class

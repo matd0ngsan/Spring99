@@ -15,5 +15,7 @@ public interface MailService {
 	int insert(MailVO vo);
 	int update(MailVO vo);
 	int delete(MailVO vo);
+	int deleteMailAllS(MailVO vo);
+	int deleteMailAllR(MailVO vo);
 
 } //class

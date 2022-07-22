@@ -48,15 +48,10 @@ function idOK(){
 } //idOK
 </script>
 <style>
-	body {
-		background-color: LightYellow;
-		font-family: 맑은고딕;
-	}
 	#wrap {
 		margin-left: 0;
 		text-align: center;
 	}
-	h3 { color: navy; }
 </style>
 </head>
 <body>
@@ -75,13 +70,12 @@ function idOK(){
 	-->
 	<div id="msgBlock">
 		<c:if test="${idUse=='T'}">
-			${newId} 는 사용 가능 합니다 ~~
+			${newId} 는 사용 가능 합니다
 			<input type="button" value="idOK" onclick="idOK()">
 			<!-- 사용자가 입력한 id 를 사용가능하도록 해주고, 현재(this)창은 close -->
 		</c:if>	
 		<c:if test="${idUse=='F'}">
-			${newId} 는 사용 불가능 합니다 (이미 사용중) ~~<br>
-			다시 입력 하세요 ~~
+			${newId} 는 이미 사용 중인 아이디입니다. 다시 입력해주세요 
 		<!-- 부모창(joinForm, opener)에 남아있는 사용자가 입력한 id는 지워주고,  
 		     현재(this)창 에서는 id 에 focus 를 주고 재입력 유도 -> script 필요
 		-->	

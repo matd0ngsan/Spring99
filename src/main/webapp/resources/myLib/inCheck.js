@@ -17,11 +17,11 @@
 function idCheck() {
 	var id=$('#id').val(); 
 	if ( id.length<4 ) {
-		$('#iMessage').html(' ID 길이는 4 이상 입니다. !! ');
+		$('#iMessage').html(' 4글자 이상 입력해주세요 ');
 		$('#id').focus();
 		return false;
 	}else if ( id.replace(/[a-z.0-9]/gi,'').length > 0 ) {
-		$('#iMessage').html(' ID는 영문자,숫자 로만 입력하세요. !! ');
+		$('#iMessage').html(' 영문자, 숫자 로만 입력하세요 ');
 		$('#id').focus();
 		return false;
 	}else {
@@ -33,16 +33,16 @@ function idCheck() {
 function pwCheck() {
 	var password=$('#password').val();
 	if ( password.length<4 ) {
-		$('#pMessage').html(' Password 길이는 4 이상 입니다. !! ');
+		$('#pMessage').html(' 4글자 이상 입력해주세요 ');
 		$('#password').focus();
 		return false;
 	}else if ( password.replace(/[!-*.@]/gi ,'').length >= password.length ) {
 		// 비교 : replace(/[!.@.#.$.%.^.&.*]/gi ,'')
-		$('#pMessage').html(' Password 에는 특수문자가 반드시 포함 되어야 합니다. !!');
+		$('#pMessage').html(' 특수문자가 반드시 포함 되어야 합니다 ');
 		$('#password').focus();
 		return false;
 	}else if ( password.replace(/[a-z.0-9.!-*.@]/gi,'').length > 0 ) {
-		$('#pMessage').html(' Password 는 영문자, 숫자, 특수문자 로만 입력하세요. !!');
+		$('#pMessage').html(' 영문자, 숫자, 특수문자 로만 입력하세요 ');
 		$('#password').focus();
 		return false;
 	}else {
@@ -54,11 +54,11 @@ function pwCheck() {
 function nameCheck() {
 	var name = $('#name').val();
 	if ( name.length < 2) {
-		$('#nMessage').html(' Name 길이는 2 이상 입니다. !! ');
+		$('#nMessage').html(' 2글자 이상 입력해주세요 ');
 		$('#name').focus();
 		return false;
 	}else if (name.replace(/[a-z.가-힣]/gi,'').length > 0) {
-		$('#nMessage').html('  Name은 영문, 한글만 입력 가능 합니다. !!');
+		$('#nMessage').html(' 영문, 한글만 입력 가능 합니다 ');
 		$('#name').focus();
 		return false;
 	}else {
@@ -70,7 +70,7 @@ function nameCheck() {
 function titleCheck() {
 	var title = $('#title').val();
 	if ( title.length < 2) {
-		$('#tMessage').html(' Title 길이는 2 이상 입니다. !! ');
+		$('#tMessage').html(' 2글자 이상 입력해주세요 ');
 		$('#title').focus();
 		return false;
 	}else {

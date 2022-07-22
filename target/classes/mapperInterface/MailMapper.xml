@@ -36,4 +36,11 @@
 	delete from mail where seq=#{seq}
 </delete>
 
+<update id="deleteMailAllS">
+	update mail set fromId = replace(fromId, #{fromId}, null)
+</update>
+<update id="deleteMailAllR">
+	update mail set toId = replace(toId, #{toId}, null)
+</update>
+
 </mapper>  

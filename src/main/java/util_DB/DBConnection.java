@@ -12,9 +12,9 @@ public class DBConnection {
 	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://web-database.cgkipf2gxisq.ap-northeast-2.rds.amazonaws.com:3306/mydb?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&allowMultiQueries=true";
+			String url = "jdbc:mysql://web-database.cgkipf2gxisq.ap-northeast-2.rds.amazonaws.com:3306/my?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&allowMultiQueries=true";
 			System.out.println("** JDBC Connection 요기까지 성공 **");
-			return DriverManager.getConnection(url, "root", "mysql") ;
+			return DriverManager.getConnection(url, "mng", "3ng1214!") ;
 		} catch (Exception e) {
 			System.out.println("** JDBC Connection 실패 => "+e);
 			return null;

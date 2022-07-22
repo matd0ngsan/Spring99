@@ -17,16 +17,13 @@
 <form action="mpost" method="POST">
 <table id="postbox">
 	<tr height="40">
-		<td class="label">받는 사람 ID</td>
-		<td class="contents"><input type="text" name="toId" id="toId" required></td>
+		<td class="contents" id="toidbox"><input type="text" name="toId" id="toId" placeholder="상대의 id를 적어주세요" required></td>
 	</tr>
 	<tr height="40">
-		<td class="label">내용</td>
-		<td class="contents"><textarea rows="5" cols="50" name="msg" id="msg" required></textarea></td>
+		<td class="contents"><textarea rows="5" cols="50" name="msg" id="msg" placeholder="편지의 내용을 적어주세요" required></textarea></td>
 	</tr>
 	<tr>
-		<td><input type="hidden" name="fromId" value="${LoginID}"></td>
-		<td class="submitbtn"><input type="submit" value="보내기"></td>
+		<td class="submitbtn"><input type="hidden" name="fromId" value="${LoginID}"><input type="submit" value="보내기"></td>
 	</tr>
 </table>
 </form><br>

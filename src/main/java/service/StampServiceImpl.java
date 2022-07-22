@@ -38,4 +38,9 @@ public class StampServiceImpl implements StampService {
 	public int delete(StampVO vo) {
 		return mapper.delete(vo);
 	}
+	
+	@Override
+	public int deleteStampAll(StampVO vo) {
+		return mapper.deleteStampAll(vo);
+	}
 }

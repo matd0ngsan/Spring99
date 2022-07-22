@@ -14,21 +14,6 @@
 	<script src="resources/myLib/axTest01.js"></script>
 	
 	<script>
-	function titleCheck() {
-		var title = $('#title').val();
-		if ( title.length < 2) {
-			$('#tMessage').html(' Title 길이는 2 이상 입니다. !! ');
-			$('#title').focus();
-			return false;
-		}else {
-			$('#tMessage').html('');
-			return true;
-		} 
-	}; //titleCheck//
-	
-	</script>
-	
-	<script>
 	//1) 전역변수 선언
 	//=> 개별적 오류 확인을 위한 switch 변수
 	var tCheck=false;
@@ -53,7 +38,7 @@
 	
 	// 3) submit 판단 & 실행 :  JS submit
 	function inCheck() {
-		if ( tCheck==false ) { $('#tMessage').html(' title 을 확인 하세요 !! '); }
+		if ( tCheck==false ) { $('#tMessage').html(' title 을 확인해주세요 '); }
 		
 		if ( tCheck ) {
 			if ( confirm("~~ 정말 가입 하십니까 ? (Yes:확인 / No:취소)")==false ) {
@@ -139,10 +124,10 @@
 		
 		<c:if test="${empty cherry}">
 			<form action="sinsert" method="POST" id="myform" enctype="multipart/form-data" >
-				<table>
+				<table id="sinsert">
 				<tr height=40>
-					<td bgcolor="AliceBlue"><label for=title>TITLE</label></td>
-					<td><input type="text" name=title id=title size="20"><span id="tMessage" class="eMessage"></span></td>
+					<td class="label"><label for=title>주제</label></td>
+					<td class="contents"><input type="text" name=title id=title size="20"></td><span id="tMessage" class="eMessage"></span>
 				</tr>
 				<tr>
 					<td><input type="hidden" name="id" value="${LoginID}"></td>	
@@ -150,6 +135,7 @@
 				</tr>	
 				</table>
 			</form>
+			
 		</c:if>
 	</div>
 </c:if>

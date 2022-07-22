@@ -55,5 +55,13 @@ public class MailServiceImpl implements MailService {
 	public int delete(MailVO vo) {
 		return mapper.delete(vo);
 	}
+	@Override
+	public int deleteMailAllS(MailVO vo) {
+		return mapper.deleteMailAllS(vo);
+	}
+	@Override
+	public int deleteMailAllR(MailVO vo) {
+		return mapper.deleteMailAllR(vo);
+	}
 	
 } //class

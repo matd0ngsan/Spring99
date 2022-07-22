@@ -132,4 +132,19 @@ public class StampDAO {
 		}
 		
 	}//delete
+	
+	public int deleteStampAll(StampVO vo) {
+		sql = "delete from stamp where id=?" ;
+		
+		try {
+			pst=cn.prepareStatement(sql);
+			pst.setString(1, vo.getId());
+			return pst.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("** Board delete Exception => "+e.toString());
+			return 0;
+		}
+		
+	}//deleteStampAll
 }

@@ -31,4 +31,8 @@
 	delete from stamp where seq=#{seq}
 </delete>
 
+<delete id="deleteStampAll">
+	delete from stamp where id=#{id}
+</delete>
+
 </mapper>

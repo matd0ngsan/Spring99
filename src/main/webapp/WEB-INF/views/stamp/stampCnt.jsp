@@ -20,7 +20,10 @@
 </head>
 <body onload="gohome()">
 
-<div></div>
-내가해냄!
+<div id="stampCntBox">
+	<div id="stampCnt1"></div>
+	<p>해냄!</p>
+	<div id="stampCnt2"></div>
+</div>
 </body>
 </html>

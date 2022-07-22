@@ -11,5 +11,6 @@ public interface StampMapper {
 	int insert(StampVO vo);
 	int update(StampVO vo);
 	int delete(StampVO vo);
+	int deleteStampAll(StampVO vo);
 	
 }

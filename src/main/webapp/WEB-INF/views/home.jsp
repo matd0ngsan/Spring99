@@ -4,6 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="resources/myLib/myStyle.css" >
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -17,7 +18,7 @@
 	<header>
 	<div id="mybox">
 		<!-- 내정보 -->
-		ID : ${LoginID} NAME : ${LoginName} <a href="logout">LOGOUT</a><br>
+		<span>ID : </span><span>${LoginID}</span> <span>NAME : </span><span>${LoginName}</span> <a href="logout">로그아웃</a><a href="memberDelete">탈퇴</a><br>
 	</div>
 	</header>
 	<nav><!-- 메뉴 -->
@@ -27,6 +28,7 @@
 			<li id="nav3">받은 편지</li>
 			<li id="nav4">보낸 편지</li>
 			<li id="nav5">편지쓰기</li>
+			<li id="nav6">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</li>
 		</ul>
 	</nav>
 	<section>
@@ -92,6 +94,10 @@
 
 	$("#nav5").click(function(){
 		$("#box").load("mpostf");
+	});
+	
+	$("#nav6").click(function(){
+		location.reload();
 	});
 </script>
 

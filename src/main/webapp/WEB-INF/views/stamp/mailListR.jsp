@@ -29,20 +29,11 @@
 		</c:forEach>
 	</c:if>
 	
-	<c:if test="${empty banana2}">
-		<div class="mailbox" id="mailR">
-			<span class="none">모든 편지를 읽었어요!</span>
-		</div>
-	</c:if>
 </c:if>
 
 <c:if test="${empty banana}">
 	
 	<c:if test="${not empty banana2}">
-		<div class="mailbox" id="mailR">
-			<span class="none">아직 읽을 수 있는 편지가 없어요!</span>
-		</div>
-		
 		<c:forEach var="mail" items="${banana2}">
 		<div class="mailbox" id="mailR">
 			<span class="none">이 편지는 아직 읽을 수 없어요.</span>

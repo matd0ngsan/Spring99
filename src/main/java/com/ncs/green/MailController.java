@@ -35,7 +35,7 @@ public class MailController {
 			mv.addObject("banana", service.mailListR(vo));
 			mv.addObject("banana2", service.mailListRN(vo));
 		} else
-			mv.addObject("message", "~~ vo null: 개인정보 읽어오기 실패 !! ~~");
+			mv.addObject("message", " 자료 없음 ");
 
 		mv.setViewName("stamp/mailListR");
 		return mv;
@@ -52,7 +52,7 @@ public class MailController {
 		if ( vo!=null ) 
 			mv.addObject("banana", service.mailListS(vo));
 		else 
-			mv.addObject("message", "~~ vo null: 개인정보 읽어오기 실패 !! ~~");
+			mv.addObject("message", " 자료 없음 ");
 
 		mv.setViewName("stamp/mailListS");
 		return mv;
@@ -75,11 +75,11 @@ public class MailController {
 		
 		if (session!=null && session.getAttribute("LoginID")!=null) {
 			if ( service.insert(vo) > 0 ) {
-				rttr.addFlashAttribute("message", "새글 등록 성공");
+				rttr.addFlashAttribute("message", " 등록 성공 ");
 				mv.setViewName("redirect:home");
 				System.out.println("새글 등록 성공");
 			} else {
-				mv.addObject("message", "새글등록 실패 !! 다시 하세요");
+				mv.addObject("message", " 등록 실패 ");
 				mv.setViewName("redirect:home");
 				System.out.println("새글 등록 실패");
 			}
@@ -98,7 +98,7 @@ public class MailController {
 		if ( service.countCheck(vo) > 0 ) {
 			mv.setViewName("redirect:home");
 		} else  {
-			rttr.addFlashAttribute("message", "~~ 글수정 실패 !! 다시 하세요 ~~");
+			rttr.addFlashAttribute("message", " 오류 발생 ");
 			mv.setViewName("redirect:home");
 		}
 		
@@ -110,11 +110,11 @@ public class MailController {
 	public  ModelAndView mdelete(ModelAndView mv, MailVO vo, RedirectAttributes rttr) {
 		
 		if ( service.delete(vo) > 0 ) {
-			rttr.addFlashAttribute("message", "~~ 글삭제 성공 ~~");
+			rttr.addFlashAttribute("message", " 삭제 성공 ");
 			mv.setViewName("redirect:home");
 			
 		}else {
-			rttr.addFlashAttribute("message", "~~ 글삭제 실패 !! 다시 하세요 ~~");
+			rttr.addFlashAttribute("message", " 삭제 실패 ");
 			mv.setViewName("redirect:home");
 			
 		}
@@ -124,19 +124,20 @@ public class MailController {
 	
 	
 	@RequestMapping(value = "/gohome", method=RequestMethod.GET)
-	public ModelAndView gohome(HttpServletRequest request, ModelAndView mv, MailVO vo) {
-		// 1. 요청분석 & Service
+	public ModelAndView gohome(HttpServletRequest request, ModelAndView mv, MailVO vo, RedirectAttributes rttr) {
+
 		HttpSession session = request.getSession(false);
 		
 		vo.setToId((String)session.getAttribute("LoginID"));
 		
-		if ( vo!=null ) {
-			mv.addObject("banana", service.mailListR(vo));
-			mv.addObject("banana2", service.mailListRN(vo));
-		} else
-			mv.addObject("message", "~~ vo null: 개인정보 읽어오기 실패 !! ~~");
-
-		mv.setViewName("redirect:home");
+		if ( service.countCheck(vo) > 0 ) {
+			rttr.addFlashAttribute("message", " 새 메시지 열람 가능 ");
+			mv.setViewName("redirect:home");
+			
+		} else {
+			mv.setViewName("redirect:home");
+		}
+		
 		return mv;
 	} //gohome
 	

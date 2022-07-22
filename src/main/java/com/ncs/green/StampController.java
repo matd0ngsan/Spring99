@@ -34,7 +34,7 @@ public class StampController {
 		if ( vo!=null )
 			mv.addObject("cherry", service.selectList(vo));
 		else
-			mv.addObject("message", "~~ vo null: 개인정보 읽어오기 실패 !! ~~");
+			mv.addObject("message", " 자료 없음 ");
 		
 		mv.setViewName("stamp/stampList");
 		return mv;
@@ -50,7 +50,7 @@ public class StampController {
 			mv.addObject("cherry", service.selectOne(vo));
 			
 		}else {
-			mv.addObject("message", "~~ 글번호에 해당하는 글이 없습니다 ~~");
+			mv.addObject("message", " 자료 없음 ");
 		}
 		
 		mv.setViewName("stamp/stampOne");
@@ -68,14 +68,14 @@ public class StampController {
 		if (session!=null && session.getAttribute("LoginID")!=null) {
 			
 			if ( service.insert(vo) > 0 ) {
-				rttr.addFlashAttribute("message", "~~ 새글 등록 성공 ~~");
+				rttr.addFlashAttribute("message", " 등록 성공 ");
 				mv.setViewName("redirect:home");
 				System.out.println("새글 등록 성공");
 				
 			}else {
-				mv.addObject("message", "~~ 새글등록 실패 !! 다시 하세요 ~~");
+				mv.addObject("message", " 등록 실패 ");
 				mv.setViewName("redirect:home");
-				System.out.println("새글 등록 실패");
+				System.out.println(" 등록 실패 ");
 			}
 		}
 		return mv;
@@ -83,13 +83,11 @@ public class StampController {
 	
 	@RequestMapping(value = "/supdate", method=RequestMethod.GET)
 	public ModelAndView supdate(ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
-		
-		logger.info("supdate controller");
-		
+				
 		if ( service.update(vo) > 0 ) {
 			mv.setViewName("stamp/stampCnt");
 		} else  {
-			rttr.addFlashAttribute("message", "~~ 글수정 실패 !! 다시 하세요 ~~");
+			rttr.addFlashAttribute("message", " 수정 성공 ");
 			mv.setViewName("redirect:home");
 		}
 		
@@ -100,11 +98,11 @@ public class StampController {
 	public  ModelAndView sdelete(ModelAndView mv, StampVO vo, RedirectAttributes rttr) {
 		
 		if ( service.delete(vo) > 0 ) {
-			rttr.addFlashAttribute("message", "~~ 글삭제 성공 ~~");
+			rttr.addFlashAttribute("message", " 삭제 성공");
 			mv.setViewName("redirect:home");
 			
 		}else {
-			rttr.addFlashAttribute("message", "~~ 글삭제 실패 !! 다시 하세요 ~~");
+			rttr.addFlashAttribute("message", " 삭제 실패 ");
 			mv.setViewName("redirect:home");
 			
 		}

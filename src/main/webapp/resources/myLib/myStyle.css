@@ -1,6 +1,13 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Jua&family=Orbitron&display=swap');
-		
+
+@media screen and (max-width: 600px) {
+	html {
+		width: 100%!important;
+		margin: 0;
+	}
+}
+
 html {
 	font-size: 10px;
 	text-align: center;
@@ -53,12 +60,21 @@ li {
 	float : left;
 }
 
-input[type="submit"], input[type="reset"] {
+input[type="submit"], input[type="reset"], input[type="button"] {
     border: 0.2rem solid var(--point2);
     background-color: var(--point1);
     color: var(--text1);
     border-radius: 2rem;
 }
+
+input:focus { outline: none; }
+
+.eMessage {
+	color: var(--text1);
+	position: relative;
+}
+
+/*********************************** 메인  ***********************************/
 
 header {
 	background-color: var(--point1);
@@ -69,6 +85,23 @@ header {
 header #mybox {
 	padding-top: 2rem;
     padding-right: 5rem;
+}
+
+#mybox span:nth-child(2n-1) {
+	font-size: 1rem;
+}
+
+#mybox span:nth-child(2n) {
+	font-size: 2rem;
+    padding: 1rem;
+}
+
+#mybox a {
+	background-color: var(--point2);
+	color: var(--text2);
+    border-radius: 1rem;
+	padding: 0.5rem;
+	margin-right: 0.5rem;
 }
 
 nav {
@@ -133,7 +166,7 @@ section #box .hometext .text2 {
 }
 
 
-#stampbox  #challenge {
+#stampbox #challenge {
 	border: 0.2rem solid var(--point1);
 	margin: auto;
 	padding: 2rem;
@@ -144,7 +177,13 @@ section #box .hometext .text2 {
 	border-radius: 3rem
 }
 
-#stampbox  #challenge tr th {
+#stampbox #challenge tr th b {
+	background-color: var(--point2);
+    color: var(--text2);
+    padding: 0.5rem 3rem;
+}
+
+#stampbox #challenge tr th {
 	height: 5rem;
 }
 
@@ -181,6 +220,120 @@ td[colspan="2"] a {
     border-radius: 2rem;
 }
 
+#stampbox form #sinsert {
+	margin: 15rem auto;
+}
+
+#stampbox #sinsert tr .label {
+	border: 0.2rem solid var(--point2);
+
+}
+
+#stampbox #sinsert tr .contents {
+	border: 0.2rem solid var(--point1);
+
+}
+
+#stampbox #sinsert input[type="text"] {
+    border: none;
+    width: 100%;
+    height: 100%;
+	padding: 0.5rem;
+}
+
+#stampbox #sinsert .eMessage {
+    top: 15rem;
+}
+
+/*********************************** 도장찍  ***********************************/
+
+#stampCntBox {
+    width: 100%;
+    margin: auto;
+    margin-top: 10rem;
+}
+
+#stampCntBox p {
+	position: relative;
+    top: 15rem;
+    font-size: 3rem;
+}
+#stampCnt1 {
+    width: 40rem;
+    height: 1rem;
+    margin: auto;
+    position: relative;
+    top: 10rem;
+}
+
+#stampCnt2 {
+    width: 40rem;
+    height: 1rem;
+    margin: auto;
+    position: relative;
+    top: 20rem;
+}
+
+#stampCnt1:before {
+	content: "";
+	background: linear-gradient(60deg, var(--point2), var(--point1));
+    position: absolute;
+    left: 0px;
+	height: 1rem;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0% ;
+	-webkit-animation: sCt1 3s ease-in-out infinite;
+	animation: sCt1 3s ease-in-out infinite;
+}
+
+#stampCnt2:before {
+	content: "";
+	background: linear-gradient(60deg, var(--point1), var(--point2));
+    position: absolute;
+    right: 0px;
+	height: 1rem;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0% ;
+	-webkit-animation: sCt1 3s ease-in-out infinite;
+	animation: sCt2 3s ease-in-out infinite;
+}
+
+@-webkit-keyframes sCt1 {
+    0% { width: 0px; }
+    70% { width: 100%; opacity: 1; }
+    90% { opacity: 0; width: 100%; }
+    100% { opacity: 0; width: 0px; }
+}
+
+@keyframes sCt1 {
+    0% { width: 0px; }
+    70% { width: 100%; opacity: 1; }
+    90% { opacity: 0; width: 100%; }
+    100% { opacity: 0; width: 0px; }
+}
+
+@-webkit-keyframes sCt2 {
+    0% { width: 0px; }
+    70% { width: 100%; opacity: 1; }
+    90% { opacity: 0; width: 100%; }
+    100% { opacity: 0; width: 0px; }
+}
+
+@keyframes sCt2 {
+    0% { width: 0px; }
+    70% { width: 100%; opacity: 1; }
+    90% { opacity: 0; width: 100%; }
+    100% { opacity: 0; width: 0px; }
+}
+
+#stampCntBox p { 
+	text-decoration: none;
+	animation-duration: 3s; 
+	animation-name: rainbowLink; 
+	animation-iteration-count: infinite; 
+}
+
+
 /*********************************** 우편함  ***********************************/
 
 .mailbox {
@@ -192,11 +345,13 @@ td[colspan="2"] a {
 }
 
 .mailbox[id="mailR"] {
-    border-radius: 2rem 2rem 2rem 0rem;
+	border-radius: 2rem 2rem 2rem 0rem;
+	margin: 2rem 2rem 0rem 0rem;
 }
 
 .mailbox[id="mailS"] {
-    border-radius: 2rem 2rem 0rem 2rem;
+	border-radius: 2rem 2rem 0rem 2rem;
+	margin: 2rem 2rem 0rem 0rem;
 }
 
 .mailbox .toname {
@@ -231,17 +386,18 @@ td[colspan="2"] a {
 
 form[action="mpost"] #postbox {
 	margin: 10rem auto;
-
 }
 
 #postbox tr .label {
 	border: 0.2rem solid var(--point2);
-
 }
 
 #postbox tr .contents {
 	border: 0.2rem solid var(--point1);
+}
 
+#postbox tr #toidbox {
+	border: 0.2rem solid var(--point2);
 }
 
 #postbox input[type="text"] {
@@ -291,11 +447,10 @@ section #userbox {
 }
 
 #userbox form .loginbox tr td, .joinbox tr td {
-	width: 15vw;
-	height: 2vh;
+	width: 20rem;
+	height: 2rem;
 	margin: 0.5vh auto;
   	border: 0.2rem solid var(--point1);
-  	background-color: #ffffff;
 }
 
 #userbox form table .submittd {
@@ -331,8 +486,8 @@ section #userbox {
 }
 
 .joinbox button {
-	width: 3vw;
-	height: 2.6vh;
+	width: 20%;
+    height: 100%;
 	background-color: var(--point2);
     color: var(--point1);
 	font-size: 1rem;
@@ -340,15 +495,20 @@ section #userbox {
 }
 
 .loginbox input[type="submit"] {
-	width: 15vW;
-    height: 2vh;
+	width: 20rem;
+    height: 3rem;
     margin: 0.5vh 1vw;
 }
 
 .joinbox input[type="submit"], .joinbox input[type="reset"] {
-	width: 6vW;
-    height: 2vh;
-    margin: 0.5vh 0.7vw;
+	width: 40%;
+    height: 3rem;
+    margin: 4%;
 }
+
+.joinbox .eMessage {
+    top: 0rem;
+}
+
     
 

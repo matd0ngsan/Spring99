@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import service.MemberService;
-import vo.MailVO;
 import vo.MemberVO;
 
 // ** Bean 생성하는 @
@@ -65,14 +64,6 @@ public class MemberController {
 		mv.setViewName("jsonView");
 		return mv;
 	} //axmdelete
-	
-	//** Ajax_MemberList
-	@RequestMapping(value = "/axmlist", method=RequestMethod.GET)
-	public ModelAndView axmlist(ModelAndView mv) {
-		mv.addObject("banana", service.selectList());        
-		mv.setViewName("axTest/axMemberList");
-		return mv;
-	} //axmlist
 	
 	//** ID 중복 확인
 	@RequestMapping(value = "/idDupCheck", method=RequestMethod.GET)

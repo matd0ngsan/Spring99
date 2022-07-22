@@ -58,13 +58,13 @@ $(function(){
 
 // 3) submit 판단 & 실행 :  JS submit
 function inCheck() {
-	if ( iCheck==false ) { $('#iMessage').html(' id 를 확인 하세요 !! '); }
-	if ( pCheck==false ) { $('#pMessage').html(' password 를 확인 하세요 !! '); }
-	if ( nCheck==false ) { $('#nMessage').html(' name 을 확인 하세요 !! '); }
+	if ( iCheck==false ) { $('#iMessage').html(' id 를 확인해주세요 '); }
+	if ( pCheck==false ) { $('#pMessage').html(' password 를 확인해주세요 '); }
+	if ( nCheck==false ) { $('#nMessage').html(' name 을 확인해주세요 '); }
 	
 	if ( iCheck && pCheck && nCheck ) {
-		if ( confirm("~~ 정말 가입 하십니까 ? (Yes:확인 / No:취소)")==false ) {
-			  alert('~~ 가입이 취소 되었습니다 ~~');
+		if ( confirm("차후 정보의 수정은 불가하며 삭제만 가능합니다. 가입할까요?")==false ) {
+			  alert('가입이 취소되었습니다.');
 			  return false; 
 		}else return true; // submit 진행 -> 404
 	} else return false;
@@ -94,15 +94,15 @@ function idDupCheck() {
 <tr height=40>
  	<td><input type="text" name=id id=id size="20" placeholder="아이디">
  		<button type="button" id="idDup" onclick="idDupCheck()">중복확인</button><br>
- 		<span id="iMessage" class="eMessage"></span></td>
+ 		</td><span id="iMessage" class="eMessage"></span>
 </tr>
 <tr height=40>
 	<td><input type="password" name=password id=password size="20" placeholder="비밀번호"><br>
- 		<span id="pMessage" class="eMessage"></span></td>
+ 		</td><span id="pMessage" class="eMessage"></span>
 </tr>
 <tr height=40>
 	<td><input type="text" name=name id=name size="20" placeholder="별명"><br>
- 		<span id="nMessage" class="eMessage"></span></td>
+ 		</td><span id="nMessage" class="eMessage"></span>
 </tr>
 <tr>	
 	<td class="submittd">

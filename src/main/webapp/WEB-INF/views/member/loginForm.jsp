@@ -45,8 +45,8 @@ $(function(){
 
 // 3) submit 판단 & 실행 :  JS submit
 function inCheck() {
-	if ( iCheck==false ) { $('#iMessage').html(' id 를 확인 하세요 !! '); }
-	if ( pCheck==false ) { $('#pMessage').html(' password 를 확인 하세요 !! '); }
+	if ( iCheck==false ) { $('#iMessage').html(' id 를 확인해주세요 '); }
+	if ( pCheck==false ) { $('#pMessage').html(' password 를 확인해주세요 '); }
 	
 	if ( iCheck && pCheck ) return true;
 	else return false;
