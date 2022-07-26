@@ -50,6 +50,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int delete(MemberVO vo) {
 		return mapper.delete(vo);
-	}	
+	}
 	
 } //class

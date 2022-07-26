@@ -36,11 +36,6 @@ function pwCheck() {
 		$('#pMessage').html(' 4글자 이상 입력해주세요 ');
 		$('#password').focus();
 		return false;
-	}else if ( password.replace(/[!-*.@]/gi ,'').length >= password.length ) {
-		// 비교 : replace(/[!.@.#.$.%.^.&.*]/gi ,'')
-		$('#pMessage').html(' 특수문자가 반드시 포함 되어야 합니다 ');
-		$('#password').focus();
-		return false;
 	}else if ( password.replace(/[a-z.0-9.!-*.@]/gi,'').length > 0 ) {
 		$('#pMessage').html(' 영문자, 숫자, 특수문자 로만 입력하세요 ');
 		$('#password').focus();
@@ -66,7 +61,7 @@ function nameCheck() {
 		return true;
 	} 
 }; //nameCheck//
-
+/*
 function titleCheck() {
 	var title = $('#title').val();
 	if ( title.length < 2) {
@@ -77,4 +72,4 @@ function titleCheck() {
 		$('#tMessage').html('');
 		return true;
 	} 
-}; //titleCheck//
+}; //titleCheck//*/

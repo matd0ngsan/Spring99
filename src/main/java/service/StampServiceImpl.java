@@ -20,7 +20,12 @@ public class StampServiceImpl implements StampService {
 	}
 	
 	@Override
-	public List<StampVO> selectOne(StampVO vo) {
+	public List<StampVO> selectOngoing(StampVO vo) {
+		return mapper.selectOngoing(vo);
+	}
+	
+	@Override
+	public StampVO selectOne(StampVO vo) {
 		return mapper.selectOne(vo);
 	}
 	

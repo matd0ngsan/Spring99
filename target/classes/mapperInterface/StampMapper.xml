@@ -8,8 +8,12 @@
 	select * from stamp where id=#{id} AND cnt=10 order by seq desc
 </select>
 
-<select id="selectOne" resultType="vo.StampVO" >
+<select id="selectOngoing" resultType="vo.StampVO" >
 	select * from stamp where id=#{id} AND cnt&lt;10
+</select>
+
+<select id="selectOne" resultType="vo.StampVO" >
+	select * from stamp where seq=#{seq}
 </select>
 
 <!-- 
@@ -20,7 +24,7 @@
 -->
 	
 <insert id="insert">
-	insert into stamp(id, title, cnt) values(#{id},#{title},default)
+	insert into stamp(id, title, cnt, upfileO, upfileX) values(#{id},#{title},default, #{upfileO}, #{upfileX})
 </insert>
 
 <update id="update">

@@ -107,7 +107,7 @@ public class MailController {
 	//ccheck
 	
 	@RequestMapping(value = "/mdelete", method=RequestMethod.GET)
-	public  ModelAndView mdelete(ModelAndView mv, MailVO vo, RedirectAttributes rttr) {
+	public ModelAndView mdelete(ModelAndView mv, MailVO vo, RedirectAttributes rttr) {
 		
 		if ( service.delete(vo) > 0 ) {
 			rttr.addFlashAttribute("message", " 삭제 성공 ");

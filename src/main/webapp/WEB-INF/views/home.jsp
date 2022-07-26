@@ -18,7 +18,7 @@
 	<header>
 	<div id="mybox">
 		<!-- 내정보 -->
-		<span>ID : </span><span>${LoginID}</span> <span>NAME : </span><span>${LoginName}</span> <a href="logout">로그아웃</a><a href="memberDelete">탈퇴</a><br>
+		<span>( ID : ${LoginID} )</span> <span>${LoginName}</span> <a href="logout">로그아웃</a><c:if test="${LoginID != 'guest'}"><a id="goodbyef">탈퇴</a></c:if><br>
 	</div>
 	</header>
 	<nav><!-- 메뉴 -->
@@ -29,6 +29,7 @@
 			<li id="nav4">보낸 편지</li>
 			<li id="nav5">편지쓰기</li>
 			<li id="nav6">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</li>
+			<li id="nav7">제보</li>
 		</ul>
 	</nav>
 	<section>
@@ -40,18 +41,22 @@
 			
 			<span class="text1">사용법</span><br><br>
 			<span class="text2">도장</span> : 도전 과제를 만들고, 달성하고, 해낸 도전들을 기록할 수 있어요.<br>
-			<span class="text2">편지</span> : 친구들과 주고받은 편지를 달성 갯수에 따라 열어볼 수 있어요.<br><br>
+			<span class="text2">편지</span> : 친구에게 받거나 미래의 내게 보낸 편지를 도전 정도에 따라 열어볼 수 있어요.<br><br>
 			
 			<span class="text2">잠깐!</span><br>
 			한 번 등록한 도전은 내용을 완수할 때까지 삭제할 수 없어요.<br>
 			한 번 보낸 편지는 친구가 확인하기 전에만 삭제할 수 있어요.<br><br>
 			
 			<span class="text1">주의사항</span><br><br>
-			본 사이트는 포트폴리오 용으로 개인에게 제작되었습니다.<br>
-			본 사이트에 입력된 모든 정보는 제작자의 의도에 따라, 혹은 의도가 아니더라도 불시에 삭제되거나 다른 곳에 제출, 게시될 수 있습니다.<br><br>
+			본 사이트는 개인 작업물입니다.<br>
+			본 사이트에 입력된 정보는 제작자의 의도에 관계없이 삭제되거나 다른 곳에 제출, 게시될 수 있습니다.<br><br>
 			
 			!! 개인 정보를 입력하지 않도록 주의해주세요. !!<br><br>
 			
+			<span class="text2">사용 :</span> 
+			<br>Java   JSP   Spring   SQL   HTML   CSS   JavaScript   jQuery
+			<br><span class="text2">환경 :</span> 
+			<br>Eclipse   MySQL   Tomcat v9.0   AWS EC2, RDS
 			
 			</p>
 			
@@ -60,9 +65,15 @@
 </c:if>
 <c:if test="${empty LoginID}">
 	<section>
+	
 	<div id="userbox">
+		<c:if test="${not empty message}"><span id="message">${message}</span></c:if>
 		<div id="btnbox"><ul><li id="loginB">LOGIN</li><li id="joinB">JOIN</li></ul></div>
-		<div id="mbox"></div>
+		<div id="mbox">
+			<p class="boxtext">방문용 ID / PW</p>
+			<p class="boxtext">guest / 0000</p>
+		</div>
+		
 	</div>
 	</section>
 </c:if>
@@ -98,6 +109,14 @@
 	
 	$("#nav6").click(function(){
 		location.reload();
+	});
+	
+	$("#nav7").click(function(){
+		$("#box").load("srpostf");
+	});
+	
+	$("#goodbyef").click(function(){
+		$("#box").load("goodbyef");
 	});
 </script>
 

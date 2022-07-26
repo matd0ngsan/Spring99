@@ -16,6 +16,6 @@ public class MemberVO {
 	private String password;
 	private String name;
 	private int lev;
-	private int scheck;
+	private String date;
 
 } //class

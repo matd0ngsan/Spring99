@@ -39,6 +39,8 @@ public class StampDAO {
 					vo1.setId(rs.getString(2));
 					vo1.setTitle(rs.getString(3));
 					vo1.setCnt(rs.getInt(4));
+					vo1.setUpfileO(rs.getString(5));
+					vo1.setUpfileX(rs.getString(6));
 					list.add(vo1);
 					
 				} while(rs.next());
@@ -54,7 +56,7 @@ public class StampDAO {
 		return list;
 	}//selectList
 	
-	public List<StampVO> selectOne(StampVO vo) {
+	public List<StampVO> selectOngoing(StampVO vo) {
 		sql = "select * from stamp where id=? AND cnt<10";
 		List<StampVO> list = new ArrayList<StampVO>();
 		
@@ -72,6 +74,8 @@ public class StampDAO {
 					vo2.setId(rs.getString(2));
 					vo2.setTitle(rs.getString(3));
 					vo2.setCnt(rs.getInt(4));
+					vo2.setUpfileO(rs.getString(5));
+					vo2.setUpfileX(rs.getString(6));
 					list.add(vo2);
 					
 				} while(rs.next());
@@ -86,6 +90,33 @@ public class StampDAO {
 		}
 		
 		return list;
+	}//selectOn
+	
+	public StampVO selectOne(StampVO vo) {
+		sql = "select * from stamp where seq=?";
+		try {
+			pst = cn.prepareStatement(sql);
+			pst.setInt(1, vo.getSeq());
+			st = cn.createStatement();
+			rs = st.executeQuery(sql);
+			
+			if (rs.next()) {
+				vo.setSeq(rs.getInt(1));
+					vo.setId(rs.getString(2));
+					vo.setTitle(rs.getString(3));
+					vo.setCnt(rs.getInt(4));
+					vo.setUpfileO(rs.getString(5));
+					vo.setUpfileX(rs.getString(6));
+			} else {
+				vo=null;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("** stampOne Exception => "+e.toString());
+			vo=null;
+		}
+		
+		return vo;
 	}//selectOne
 	
 	public int insert(StampVO vo) {

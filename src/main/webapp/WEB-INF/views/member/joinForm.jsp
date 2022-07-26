@@ -89,6 +89,11 @@ function idDupCheck() {
 
 </head>
 <body>
+<div class="jointext">
+	<p class="hometext"><br>
+	편지를 주고받기 위해서는 상대에게 <span class="text2">id</span> 를 알려주어야 합니다.<br>
+	<span class="text2">별명</span> 은 편지를 보낸 상대가 볼 수 있습니다.</p>
+</div>
 <form action="join" method="post" id="myform" enctype="multipart/form-data" >
 <table class="joinbox">
 <tr height=40>

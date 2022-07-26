@@ -2,6 +2,11 @@ package com.ncs.green;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,29 +47,6 @@ public class MemberController {
 		return mv;
 	} //stamp
 	
-	//** Ajax Member Delete 
-	@RequestMapping(value = "/axmdelete")
-	public ModelAndView axmdelete(HttpServletRequest request, ModelAndView mv, MemberVO vo) {
-		// 1. 요청분석 & Service
-		HttpSession session = request.getSession(false); 
-		if ( session!=null && ((String)session.getAttribute("LoginID")).equals("admin")) {
-			// 삭제가능
-			if ( service.delete(vo) > 0 ) {
-				// 삭제성공   
-				mv.addObject("code", "200");
-			}else {
-				// 삭제실패 -> 서버오류  
-				mv.addObject("code", "201");
-			}
-		}else {
-			// 삭제 불가능 -> 로그인 정보 없음  
-			mv.addObject("code", "202");
-		}
-		// 2. 결과 view처리 : Java 객체 -> JSON 
-		mv.setViewName("jsonView");
-		return mv;
-	} //axmdelete
-	
 	//** ID 중복 확인
 	@RequestMapping(value = "/idDupCheck", method=RequestMethod.GET)
 	public ModelAndView idDupCheck(ModelAndView mv, MemberVO vo) {
@@ -90,35 +72,44 @@ public class MemberController {
 	} //loginf
 	
 	@RequestMapping(value = "/login")
-	public ModelAndView login(HttpServletRequest request, ModelAndView mv, MemberVO vo, RedirectAttributes rttr) {
-		// 1. 요청분석
-		String password = vo.getPassword();
+	public ModelAndView login(HttpServletRequest request, ModelAndView mv, MemberVO vo, RedirectAttributes rttr) throws NoSuchAlgorithmException {
 		
-		// 2. Service
-		vo = service.selectOne(vo);
+		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+		byte[] bytes = new byte[16];
+		random.nextBytes(bytes);
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		
+		String pw = vo.getId() + vo.getPassword();
+		
+		md.update(pw.getBytes());
+		String pass = String.format("%064x", new BigInteger(1, md.digest()));//입력한 비밀번호
+		
+		vo = service.selectOne(vo); //아이디로 검색한 DB
+		
 		if ( vo!=null ) {
 			// id 성공 -> password 확인
-			if ( vo.getPassword().equals(password) ) {
+			
+			if ( pass.equals(vo.getPassword()) ) { //검색된비번, 입력한비번
 				// Login 성공 -> Login정보(id,name) 보관 -> home
 				// => session 객체 생성후 보관
 				HttpSession session = request.getSession(true);
 				session.setAttribute("LoginID",vo.getId()); 
 				session.setAttribute("LoginName",vo.getName());
-				// mv.addObject("message", "~~ Login 성공 ~~");
+				// mv.addObject("message", " 로그인 성공 ");
 				// => redirect 의 경우 메시지 출력안됨
 				//    해결 : RedirectAttributes 
-				rttr.addFlashAttribute("message", "~~ Login 성공 ~~");
+				// rttr.addFlashAttribute("message", "~~ Login 성공 ~~");
 				mv.setViewName("redirect:home");
 				// => 요청명 "home" 으로 sendRedirect
 			}else {
 				// password 오류 -> LoginForm
-				mv.addObject("message", "~~ password 오류 !! 다시 하세요 ~~");
-				mv.setViewName("member/loginForm");
+				rttr.addFlashAttribute("message", " password 를 확인해주세요 ");
+				mv.setViewName("redirect:home");
 			}
 		}else {
 			// id 오류 -> LoginForm
-			mv.addObject("message", "~~ id 오류 !! 다시 하세요 ~~");
-			mv.setViewName("member/loginForm");
+			rttr.addFlashAttribute("message", " id 를 확인해주세요 ");
+			mv.setViewName("redirect:home");
 		}
 		// 3. 결과 : view 처리
 		return mv;
@@ -147,116 +138,34 @@ public class MemberController {
 	//@RequestMapping(value = "/join", method=RequestMethod.GET)
 	// => 405: Request method 'POST' not supported
 	@RequestMapping(value = "/join", method=RequestMethod.POST)
-	public ModelAndView join(HttpServletRequest request, 
-							ModelAndView mv, MemberVO vo) throws IOException {
+	public ModelAndView join(HttpServletRequest request, ModelAndView mv, MemberVO vo) throws IOException, NoSuchAlgorithmException {
+		
+		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+		byte[] bytes = new byte[16];
+		random.nextBytes(bytes);
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		
+		String pw = vo.getId() + vo.getPassword();
+		
+		md.update(pw.getBytes());
+		String pass = String.format("%064x", new BigInteger(1, md.digest()));
+		
+		vo.setPassword(pass);
 		
 		System.out.println("***** vo => "+vo);
 		
 		// 2. Service
 		if ( service.insert(vo) > 0 ) {
 			// 입력성공 -> loginForm 으로 
-			mv.addObject("message", "~~ 회원가입 완료 -> 로그인후 이용 하세요 ~~");
+			mv.addObject("message", " 회원가입 성공 ");
 			mv.setViewName("home");
 		}else {
 			// 입력실패 -> 재시도 유도 joinForm 으로
-			mv.addObject("message", "~~ 회원가입 오류 -> 다시 하세요 ~~");
+			mv.addObject("message", " 회원가입 오류 ");
 			mv.setViewName("home");
 		}
 		// 3. 결과 : view 처리
 		return mv;
 	} //join
-	
-	//** 3. MemberList
-	@RequestMapping(value = "/mlist")
-	public ModelAndView mlist(ModelAndView mv) {
-		// 1. 요청분석 & Service
-		mv.addObject("banana", service.selectList());
-		mv.setViewName("member/memberList");
-		
-		// 2. 결과 : view 처리
-		return mv;
-	} //mlist
-	
-	//** 4. MemberDetail
-	@RequestMapping(value = "/mdetail")
-	public ModelAndView mdetail(HttpServletRequest request, ModelAndView mv, MemberVO vo) {
-		// 1. 요청분석 & Service
-		
-		HttpSession session = request.getSession(false);  
-		if ( session!=null && session.getAttribute("LoginID")!=null ) {
-			 
-			vo.setId((String)session.getAttribute("LoginID"));
-			vo = service.selectOne(vo);
-			if ( vo!=null ) { 
-				// => vo를 View가 출력 가능하도록 담고 View 지정
-				request.setAttribute("apple", vo);
-				// => Detail or Update 확인 
-				if ( request.getParameter("jcode")!=null && request.getParameter("jcode").equals("U") )  
-					 mv.setViewName("member/updateForm");
-				else mv.setViewName("member/memberDetail");
-				
-			}else {
-				// => user 정보 읽어오는데 실패 -> 재로그인 유도 ( loginForm.jsp ) 
-				mv.addObject("message", "~~ vo null: 개인정보 읽어오기 실패 !! ~~");
-				mv.setViewName("member/loginForm");
-			} // vo
-		}else {
-			// 로그인정보가 없음을 알려준다 -> 재로그인 유도 ( loginForm.jsp )
-			mv.addObject("message", "~~ session null: 로그인 정보가 없습니다 !! ~~");
-			mv.setViewName("member/loginForm");
-		} // session_if-else
-		
-		// 2. 결과 : view 처리
-		return mv;
-	} //mdetail
-	
-	//** 7. Member Update
-	@RequestMapping(value = "/mupdate", method=RequestMethod.POST)
-	public ModelAndView mupdate(HttpServletRequest request, 
-							ModelAndView mv, MemberVO vo) throws IOException {
-		
-		
-		// 2. Service
-		mv.addObject("apple", vo);
-		
-		if ( service.update(vo) > 0 ) {
-			// 수정성공 -> MyInfo 내정보 표시 , session에 보관중인 LoginName 변경
-			request.getSession().setAttribute("LoginName", vo.getName());
-			mv.addObject("message", " ~~ 정보 수정 성공 ~~");
-			mv.setViewName("member/memberDetail");
-		}else {
-			// 수정실패 -> updateForm 으로
-			mv.addObject("message", " ~~ 정보 수정 실패 -> 다시하세요 ~~");
-			mv.setViewName("member/updateForm");
-		}
-		// 3. 결과 : view 처리
-		return mv;
-	} //mupdate
-	
-	//** 8. Member Delete 
-	@RequestMapping(value = "/mdelete")
-	public ModelAndView mdelete(HttpServletRequest request, ModelAndView mv, MemberVO vo, RedirectAttributes rttr) {
-		// 1. 요청분석 & Service
-		HttpSession session = request.getSession(false); 
-		if ( session!=null && session.getAttribute("LoginID")!=null ) {
-			// 삭제가능
-			vo.setId((String)session.getAttribute("LoginID"));
-			if ( service.delete(vo) > 0 ) {
-				// 삭제성공 -> session 무효화 -> home.jsp
-				rttr.addFlashAttribute("message", " ~~ 회원탈퇴 성공, 1개월 후 재가입 가능 ~~");
-				session.invalidate();
-			}else {
-				// 삭제실패 -> 서버오류 -> home.jsp
-				rttr.addFlashAttribute("message", " ~~ 회원 탈퇴 처리중 서버 문제발생 , 잠시후 다시 하세요 ~~");
-			}
-		}else {
-			// 삭제 불가능 -> 로그인 정보 없음 -> home.jsp
-			rttr.addFlashAttribute("message", " ~~ 회원 탈퇴를 처리할수 없습니다 : 로그인 정보 없음 ~~");
-		}
-		
-		// 2. 결과 : view 처리
-		mv.setViewName("redirect:home");
-		return mv;
-	} //mdelete
 	
 } //class

@@ -54,8 +54,8 @@ public class HomeController {
 		return mv;
 	} //axtest
 	
-	@RequestMapping(value = "/memberDelete", method=RequestMethod.GET)
-	public ModelAndView memberDelete(ModelAndView mv) {
+	@RequestMapping(value = "/goodbyef", method=RequestMethod.GET)
+	public ModelAndView goodbyef(ModelAndView mv) {
 		
 		mv.setViewName("member/memberDelete");
 		return mv;
@@ -67,39 +67,47 @@ public class HomeController {
 		//아이디 받아서
 		HttpSession session = request.getSession(false);
 		
-		vo1.setId((String)session.getAttribute("LoginID"));
-		vo2.setFromId((String)session.getAttribute("LoginID"));
-		vo2.setToId((String)session.getAttribute("LoginID"));
-		vo3.setId((String)session.getAttribute("LoginID"));
-		
-		if (service1.deleteStampAll(vo1) > 0) {
-			logger.info("도장판 삭제");
-		} else {
-			logger.info("삭제할 도장판 없음");
-		}
-		
-		if (service2.deleteMailAllS(vo2) > 0) {
-			logger.info("보낸 편지 삭제");
-		} else {
-			logger.info("삭제할 편지 없음");
-		}
-		
-		if (service2.deleteMailAllR(vo2) > 0) {
-			logger.info("받은 편지 삭제");
-		} else {
-			logger.info("삭제할 편지 없음");
-		}
-		
-		//멤버 탈퇴
-		if ( service3.delete(vo3) > 0 ) {
-			request.getSession().invalidate(); 
-			rttr.addFlashAttribute("message", " 탈퇴 성공 ");
+		if (session.getAttribute("LoginID").equals("guest")) {
 			
-		}else {
-			rttr.addFlashAttribute("message", " 탈퇴 실패 ");
+			mv.setViewName("redirect:home");
+			
+		} else {
+			
+			vo1.setId((String)session.getAttribute("LoginID"));
+			vo2.setFromId((String)session.getAttribute("LoginID"));
+			vo2.setToId((String)session.getAttribute("LoginID"));
+			vo3.setId((String)session.getAttribute("LoginID"));
+			
+			if (service1.deleteStampAll(vo1) > 0) {
+				logger.info("도장판 삭제");
+			} else {
+				logger.info("삭제할 도장판 없음");
+			}
+			
+			if (service2.deleteMailAllS(vo2) > 0) {
+				logger.info("보낸 편지 삭제");
+			} else {
+				logger.info("삭제할 편지 없음");
+			}
+			
+			if (service2.deleteMailAllR(vo2) > 0) {
+				logger.info("받은 편지 삭제");
+			} else {
+				logger.info("삭제할 편지 없음");
+			}
+			
+			//멤버 탈퇴
+			if ( service3.delete(vo3) > 0 ) {
+				request.getSession().invalidate(); 
+				rttr.addFlashAttribute("message", " 탈퇴 성공 ");
+				
+			}else {
+				rttr.addFlashAttribute("message", " 탈퇴 실패 ");
+			}
+			
+			mv.setViewName("redirect:home");
 		}
 		
-		mv.setViewName("redirect:home");
 		return mv;
 		
 	}

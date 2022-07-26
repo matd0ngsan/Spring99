@@ -22,7 +22,7 @@
 	
 	<c:if test="${not empty banana2}">
 		<c:forEach var="mail" items="${banana2}">
-		<div class="mailbox" id="mailR">
+		<div class="mailbox" id="mailR_yet">
 			<span class="none">이 편지는 아직 읽을 수 없어요.</span>
 			<span class="date">${mail.date}</span>
 		</div>
@@ -35,7 +35,7 @@
 	
 	<c:if test="${not empty banana2}">
 		<c:forEach var="mail" items="${banana2}">
-		<div class="mailbox" id="mailR">
+		<div class="mailbox" id="mailR_yet">
 			<span class="none">이 편지는 아직 읽을 수 없어요.</span>
 			<span class="date">${mail.date}</span>
 		</div>
@@ -43,7 +43,7 @@
 	</c:if>
 	
 	<c:if test="${empty banana2}">
-		<div class="mailbox" id="mailR">
+		<div class="mailbox" id="mailR_no">
 			<span class="none">아직 받은 편지가 없어요.</span>
 		</div>
 	</c:if>

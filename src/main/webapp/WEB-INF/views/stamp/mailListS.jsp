@@ -27,7 +27,7 @@
 	</c:forEach>
 </c:if>
 <c:if test="${empty banana}">
-	<div class="mailbox" id="mailS">
+	<div class="mailbox" id="mailS_no">
 		<span class="none">아직 보낸 편지가 없어요!</span>
 	</div>
 </c:if>

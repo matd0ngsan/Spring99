@@ -1,5 +1,9 @@
 package util_DB;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +52,7 @@ public class MemberDAO {
 					 vo.setPassword(rs.getString(2));
 					 vo.setName(rs.getString("name"));
 					 vo.setLev(rs.getInt(4));
-					 vo.setScheck(rs.getInt(5));
+					 vo.setDate(rs.getString(5));
 					 list.add(vo);
 				 }while(rs.next());
 			 }else {
@@ -76,7 +80,7 @@ public class MemberDAO {
 				vo.setPassword(rs.getString(2));
 				vo.setName(rs.getString("name"));
 				vo.setLev(rs.getInt(4));
-				 vo.setScheck(rs.getInt(5));
+				 vo.setDate(rs.getString(5));
 			}else {
 				vo = null;
 			}
@@ -98,7 +102,7 @@ public class MemberDAO {
 			pst.setString(2, vo.getPassword());
 			pst.setString(3, vo.getName());
 			pst.setInt(4, vo.getLev());
-			pst.setInt(5,  vo.getScheck());
+			pst.setString(5,  vo.getDate());
 			return pst.executeUpdate();  // int Type return -> 처리된 Data 갯수
 		} catch (Exception e) {
 			System.out.println("** insert Exception => "+e);
@@ -136,7 +140,25 @@ public class MemberDAO {
 		} //try
 	} //delete			
 	
-	
+	public String pass(MemberVO vo) throws NoSuchAlgorithmException {
+		
+		String id = vo.getId();
+		String password = vo.getPassword();
+		
+		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+		byte[] bytes = new byte[16];
+		random.nextBytes(bytes);
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		
+		String pw = id+password;
+		String pass = "";
+		
+		md.update(pw.getBytes());
+		pass = String.format("%064x", new BigInteger(1, md.digest()));
+		
+		return pass;
+		
+	}
 	
 
 } //class

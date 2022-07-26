@@ -25,7 +25,7 @@ html {
 
 body {
 	background-image : url(../images/bg.png);
-
+	position: relative;
 }
 
 ul {
@@ -76,6 +76,30 @@ input:focus { outline: none; }
 
 /*********************************** 메인  ***********************************/
 
+#box span[id="message"] {
+	background: linear-gradient(120deg, var(--point2), var(--point1));
+    border-radius: 1rem;
+    color: #fffeed;
+    font-size: 1.6rem;
+    margin: auto;
+    padding: 1rem 5rem;
+    position: absolute;
+    top: 8rem;
+    transform: translate(-50%, -50%);
+}
+
+#userbox span[id="message"] {
+	background: linear-gradient(120deg, var(--point2), var(--point1));
+    border-radius: 1rem;
+    color: #fffeed;
+    font-size: 1.6rem;
+    margin: auto;
+    padding: 1rem 5rem;
+    position: absolute;
+    top: -3rem;
+    transform: translate(-50%, -50%);
+}
+
 header {
 	background-color: var(--point1);
 	text-align: right;
@@ -106,8 +130,9 @@ header #mybox {
 
 nav {
 	float: right;
-    position: relative;
-    top: -5rem;
+    position: absolute;
+    top: 1rem;
+    right: 0rem;
     width: 5rem;
 }
 
@@ -141,28 +166,41 @@ section #box .hometext {
     text-align: left;
 }
 
-section #box .hometext .text1 {
+.hometext .text1 {
 	font-size: 2rem;
 	background-color: var(--point2);
 	color: var(--text2);
     padding: 0.3rem 1.5rem;
 }
 
-section #box .hometext .text2 {
+.hometext .text2 {
 	color: var(--point2);
+}
+
+.jointext .hometext {
+	text-align: center;
+    font-size: 1.2rem;
+}
+
+
+#memberdeletediv {
+	font-size: 1.5rem;
+    text-align: left;
+	padding-top: 10rem;
+	color: var(--point2);
+}
+
+#memberdeletediv a {
+	color: var(--point1);
 }
 
 /*********************************** 스탬프  ***********************************/
 #stampO {
-	background-image : url(../images/O.gif);
-	background-size: cover;
+	
 }
 
 #stampX {
-	background-image : url(../images/X.png);
-	background-size: 70%;
-    background-repeat: no-repeat;
-    background-position: center;
+	
 }
 
 
@@ -171,7 +209,6 @@ section #box .hometext .text2 {
 	margin: auto;
 	padding: 2rem;
 	text-align: center;
-	/*background-image : url(../images/sb.png);*/
 	background-repeat: no-repeat;
 	margin-top: 10rem;
 	border-radius: 3rem
@@ -192,6 +229,12 @@ section #box .hometext .text2 {
     width: 10rem;
     height: 10rem;
     border-radius: 1rem;
+}
+
+#stampbox #challenge tr td img {
+    width: 10rem;
+	height: 10rem;
+	object-fit: cover;
 }
 
 #stampbox #challenge tr td[colspan="2"] {
@@ -220,12 +263,25 @@ td[colspan="2"] a {
     border-radius: 2rem;
 }
 
+.stpbtn {
+	border: none!important;
+}
+
+.stpbtn a {
+	border: 0.2rem solid var(--point2);
+    background-color: var(--point1);
+    color: var(--text2);
+    padding: 2rem;
+    border-radius: 2rem;
+}
+
 #stampbox form #sinsert {
 	margin: 15rem auto;
 }
 
 #stampbox #sinsert tr .label {
 	border: 0.2rem solid var(--point2);
+	padding: 0.2rem 1rem;
 
 }
 
@@ -243,6 +299,63 @@ td[colspan="2"] a {
 
 #stampbox #sinsert .eMessage {
     top: 15rem;
+}
+
+form[action="sinsert"] input[type="submit"] {
+	float: right;
+}
+
+#sinsert .fileupload2 .upload-name {
+	display: inline-block;
+    vertical-align: middle;
+    width: 20rem;
+    height: 3rem;
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+    color: var(--text1);
+    border: 1px solid #dddddd;
+}
+
+#sinsert .fileupload2 .filelabel {
+	display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    width: 6rem;
+    height: 2rem;
+    margin-left: 1rem;
+    padding: 0.3rem 2rem;
+    color: var(--text2);
+    background-color: var(--point2);
+    cursor: pointer;
+}
+
+#sinsert .fileupload2 span {
+	color: var(--point2);
+}
+
+#sinsert input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+	border: 0;
+}
+
+#sinsert .sinsert_text { 
+	color: var(--point2);
+}
+
+#stampbox .no_stamp {
+	margin: 10rem auto;
+    width: 30rem;
+    height: 20rem;
+    font-size: 2rem;
+    border: 0.5rem dashed var(--point2);
+}
+
+#stampbox .no_stamp p {
+	padding: 7rem 1rem;
 }
 
 /*********************************** 도장찍  ***********************************/
@@ -338,13 +451,12 @@ td[colspan="2"] a {
 
 .mailbox {
 	border: 0.2rem solid var(--point1);
-	background: linear-gradient(60deg, var(--point2), var(--point1));
-    color: var(--text2);
+	color: var(--text2);
     margin: 2rem;
     padding: 1rem;
 }
 
-.mailbox[id="mailR"] {
+.mailbox[id="mailR"], .mailbox[id="mailR_yet"] {
 	border-radius: 2rem 2rem 2rem 0rem;
 	margin: 2rem 2rem 0rem 0rem;
 }
@@ -352,6 +464,22 @@ td[colspan="2"] a {
 .mailbox[id="mailS"] {
 	border-radius: 2rem 2rem 0rem 2rem;
 	margin: 2rem 2rem 0rem 0rem;
+}
+
+.mailbox[id="mailR_no"], .mailbox[id="mailS_no"] {
+	border-radius: 1rem;
+	margin: 2rem 2rem 0rem 0rem;
+	background: linear-gradient(to bottom, var(--point1), var(--point2));
+	font-size: 1.4rem;
+}
+
+.mailbox[id="mailR"], .mailbox[id="mailS"] {
+	background: linear-gradient(60deg, var(--point2), var(--point1));
+}
+
+.mailbox[id="mailR_yet"] {
+	background: linear-gradient(60deg, var(--point1), var(--point2));
+	font-size: 1.4rem;
 }
 
 .mailbox .toname {
@@ -384,7 +512,7 @@ td[colspan="2"] a {
 }
 
 
-form[action="mpost"] #postbox {
+#postbox {
 	margin: 10rem auto;
 }
 
@@ -423,7 +551,11 @@ form[action="mpost"] #postbox {
 section #userbox {
 	width: 100%;
     height: 100%;
-    margin: 10rem auto;
+	margin: 10rem auto;
+}
+
+#userbox #mbox .boxtext {
+	font-size: 2rem;
 }
 
 #userbox #btnbox {
@@ -435,7 +567,7 @@ section #userbox {
 	width: 6rem;
     height: 2rem;
     padding: 0.2rem;
-    margin: 1rem;
+    margin: 2rem;
     border: 3px solid var(--point2);
     background-color: var(--point1);
     color: var(--text2);

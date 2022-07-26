@@ -130,7 +130,6 @@ public class MailDAO {
 				vo.setCcheck(rs.getInt(5));
 				vo.setDate(rs.getString(6));
 			}else {
-				System.out.println("** 글번호에 해당하는 글이 없습니다 **");
 				vo=null;
 			}
 		} catch (Exception e) {
